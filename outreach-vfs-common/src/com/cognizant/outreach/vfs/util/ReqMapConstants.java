@@ -28,5 +28,12 @@ public class ReqMapConstants {
 	public static final String GET_ADMIN_DATA = "/getAdminData";
 	public static final String GET_EVENTDETAILS_DATA = "/getEventDetailsData";
 	public static final String UPDATE_ADMIN_DATA = "/updateAdminData";
+	public static final String GET_INSIGHT_DATA = "/getInsights";
+	public static final String GET_EVENT_SUMMARY_DATA = "/getEventDataList";
+	public static final String TRIGGER_EMAIL_BATCH = "/triggerEmailBatch/{eventId}";
+
+//	//Admin API
+//    public static final String VFS_BATCH = VFS+VERSION + "/vfsBatch";
+//	public static final String TRIGGER_EMAIL_BATCH = "/triggerEmailBatch/{eventId}";
 
 } 

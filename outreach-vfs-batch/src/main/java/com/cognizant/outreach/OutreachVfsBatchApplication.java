@@ -12,4 +12,25 @@ public class OutreachVfsBatchApplication {
 		SpringApplication.run(OutreachVfsBatchApplication.class, args);
 	}
 
+//	@Bean
+//    public Docket newsApi() {
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .groupName("apis")
+//                .apiInfo(apiInfo())
+//                .select()
+//                .paths(regex("/vfs/api.*"))
+//                .build();
+//    }
+//	
+//	private ApiInfo apiInfo() {
+//        return new ApiInfoBuilder()
+//                .title("VFS REST API Documents")
+//                .description("Documents with Swagger 2")
+//                .termsOfServiceUrl("http://cognizant.com")
+//                .contact(new Contact("VFS", "http://cognizant.com", "512641@cognizant.com"))
+//                .license("")
+//                .licenseUrl("")
+//                .version("1.0")
+//                .build();
+//    }
 }

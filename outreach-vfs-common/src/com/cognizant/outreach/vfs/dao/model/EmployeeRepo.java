@@ -95,6 +95,10 @@ public class EmployeeRepo implements Serializable {
 		this.status = status;
 	}
 
+	public String getEmployeeFullname() {
+		return this.empFirstName + " " + this.empLastName;
+	}
+	
 	public int getEmployeeId() {
 		return this.employeeId;
 	}

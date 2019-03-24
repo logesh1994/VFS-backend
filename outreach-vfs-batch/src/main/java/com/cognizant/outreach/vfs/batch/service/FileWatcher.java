@@ -80,7 +80,7 @@ public class FileWatcher {
 								FileUtils.getFile(appConfig.getValueOfKey(Constants.INPROGRESS_FILEPATH)+filename));
 						
 						adminDataUpdateService.updateAdminData(filename.toString().replace(Constants.EXCEL_EXTENSION, ""), 
-						FileUtil.parseExcelToJson(appConfig.getValueOfKey(Constants.INPROGRESS_FILEPATH)+filename));
+						FileUtil.parseExcelToJson(appConfig.getValueOfKey(Constants.INPROGRESS_FILEPATH)+filename), "ADD");
 						FileUtils.moveFile(FileUtils.getFile(appConfig.getValueOfKey(Constants.INPROGRESS_FILEPATH)+filename),
 								FileUtils.getFile(appConfig.getValueOfKey(Constants.COMPLETED_FILEPATH)+filename.toString().replace(Constants.EXCEL_EXTENSION, "")
 										+"_"+System.currentTimeMillis()+Constants.EXCEL_EXTENSION));

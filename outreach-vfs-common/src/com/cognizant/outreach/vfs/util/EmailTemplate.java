@@ -35,7 +35,7 @@ public class EmailTemplate {
 			"<!--<![endif]-->\r\n" + 
 			"<div align=\"center\" class=\"img-container center autowidth fullwidth\" style=\"padding-right: 0px;padding-left: 0px;\">\r\n" + 
 			"<!--[if mso]><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr style=\"line-height:0px\"><td style=\"padding-right: 0px;padding-left: 0px;\" align=\"center\"><![endif]-->\r\n" + 
-			"<div style=\"font-size:1px;line-height:25px\"> </div><img align=\"center\" alt=\"Image\" border=\"0\" class=\"center autowidth fullwidth\" src=\"http://localhost:4200/assets/rounder-up.png\" style=\"outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 600px; display: block;\" title=\"Image\" width=\"600\"/>\r\n" + 
+			"<div style=\"font-size:1px;line-height:25px\"> </div><img align=\"center\" alt=\"Image\" border=\"0\" class=\"center autowidth fullwidth\" src=\"cid:rounder-up\" style=\"outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 600px; display: block;\" title=\"Image\" width=\"600\"/>\r\n" + 
 			"<!--[if mso]></td></tr></table><![endif]-->\r\n" + 
 			"</div>\r\n" + 
 			"<!--[if (!mso)&(!IE)]><!-->\r\n" + 
@@ -59,7 +59,7 @@ public class EmailTemplate {
 			"<div style=\"border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;\">\r\n" + 
 			"<!--<![endif]-->\r\n" + 
 			"<div align=\"center\" class=\"img-container center autowidth\" style=\"padding-right: 0px;padding-left: 0px;\">\r\n" + 
-			"<!--[if mso]><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr style=\"line-height:0px\"><td style=\"padding-right: 0px;padding-left: 0px;\" align=\"center\"><![endif]--><img align=\"center\" alt=\"Image\" border=\"0\" class=\"center autowidth\" src=\"http://localhost:4200/assets/Cognizant_Outreach_Logo.png\" style=\"outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 224px; display: block;\" title=\"Image\" width=\"224\"/>\r\n" + 
+			"<!--[if mso]><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr style=\"line-height:0px\"><td style=\"padding-right: 0px;padding-left: 0px;\" align=\"center\"><![endif]--><img align=\"center\" alt=\"Image\" border=\"0\" class=\"center autowidth\" src=\"cid:Cognizant_Outreach_Logo\" style=\"outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 224px; display: block;\" title=\"Image\" width=\"224\"/>\r\n" + 
 			"<!--[if mso]></td></tr></table><![endif]-->\r\n" + 
 			"</div>\r\n" + 
 			"<!--[if (!mso)&(!IE)]><!-->\r\n" + 
@@ -90,7 +90,7 @@ public class EmailTemplate {
 			"</div>\r\n" + 
 			"<!--[if mso]></td></tr></table><![endif]-->\r\n" + 
 			"<div align=\"center\" class=\"img-container center autowidth\">\r\n" + 
-			"<!--[if mso]><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr style=\"line-height:0px\"><td style=\"\" align=\"center\"><![endif]--><img align=\"center\" alt=\"Image\" border=\"0\" class=\"center autowidth\" src=\"http://localhost:4200/assets/divider.png\" style=\"outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 316px; display: block;\" title=\"Image\" width=\"316\"/>\r\n" + 
+			"<!--[if mso]><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr style=\"line-height:0px\"><td style=\"\" align=\"center\"><![endif]--><img align=\"center\" alt=\"Image\" border=\"0\" class=\"center autowidth\" src=\"cid:divider\" style=\"outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 316px; display: block;\" title=\"Image\" width=\"316\"/>\r\n" + 
 			"<!--[if mso]></td></tr></table><![endif]-->\r\n" + 
 			"</div>\r\n" + 
 			"<!--[if mso]><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td style=\"padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; font-family: 'Trebuchet MS', Tahoma, sans-serif\"><![endif]-->\r\n" + 
@@ -168,7 +168,7 @@ public class EmailTemplate {
 			"<div style=\"border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:0px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;\">\r\n" + 
 			"<!--<![endif]-->\r\n" + 
 			"<div align=\"center\" class=\"img-container center autowidth fullwidth\" style=\"padding-right: 0px;padding-left: 0px;\">\r\n" + 
-			"<!--[if mso]><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr style=\"line-height:0px\"><td style=\"padding-right: 0px;padding-left: 0px;\" align=\"center\"><![endif]--><img align=\"center\" alt=\"Image\" border=\"0\" class=\"center autowidth fullwidth\" src=\"http://localhost:4200/assets/rounder-dwn.png\" style=\"outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 600px; display: block;\" title=\"Image\" width=\"600\"/>\r\n" + 
+			"<!--[if mso]><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr style=\"line-height:0px\"><td style=\"padding-right: 0px;padding-left: 0px;\" align=\"center\"><![endif]--><img align=\"center\" alt=\"Image\" border=\"0\" class=\"center autowidth fullwidth\" src=\"cid:rounder-dwn\" style=\"outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; border: 0; height: auto; float: none; width: 100%; max-width: 600px; display: block;\" title=\"Image\" width=\"600\"/>\r\n" + 
 			"<!--[if mso]></td></tr></table><![endif]-->\r\n" + 
 			"</div>\r\n" + 
 			"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"divider\" style=\"table-layout: fixed; vertical-align: top; border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; min-width: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;\" valign=\"top\" width=\"100%\">\r\n" + 

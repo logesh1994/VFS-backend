@@ -62,7 +62,7 @@
 			<artifactId>outreach-vfs-common</artifactId>
 			<version>1.0.1</version>
 		</dependency>
-	</dependencies>
+	</dependencies> 
 
 	<build>
 		<plugins>

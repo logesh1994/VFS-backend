@@ -69,7 +69,7 @@ public class FeedbackService {
 	
 	public FeedbackTemplate saveFeedbackData(Feedback feedbackData) {
 		entityHelperService.addFeedbackData(feedbackData.getImprove_feedback(), 
-				feedbackData.getLike_feedback(), feedbackData.getUpdate_id(), feedbackData.getEvent_detail_id(), feedbackData.getFeedback_option(), feedbackData.getRating());
+				feedbackData.getLike_feedback(), feedbackData.getUpdate_id(), feedbackData.getEvent_detail_id(), feedbackData.getFeedback_option(), feedbackData.getRating(), 0, "ADD");
 		EventDetailRepo repo = eventDetailRepository.findByEventDetailId(feedbackData.getEvent_detail_id());
 		if (repo != null) {
 			repo.getStatus2().setDescription("Submitted");

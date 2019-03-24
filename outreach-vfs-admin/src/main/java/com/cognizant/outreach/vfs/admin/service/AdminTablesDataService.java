@@ -39,6 +39,7 @@ import com.cognizant.outreach.vfs.dao.repo.CategoryRepository;
 import com.cognizant.outreach.vfs.dao.repo.EmployeeRepository;
 import com.cognizant.outreach.vfs.dao.repo.EventBeneficiaryRepository;
 import com.cognizant.outreach.vfs.dao.repo.EventCouncilRepository;
+import com.cognizant.outreach.vfs.dao.repo.EventDetailRepository;
 import com.cognizant.outreach.vfs.dao.repo.EventRepository;
 import com.cognizant.outreach.vfs.dao.repo.FeedbackOptionRepository;
 import com.cognizant.outreach.vfs.dao.repo.IiepCategoryRepository;
@@ -105,6 +106,9 @@ public class AdminTablesDataService {
     
     @Autowired
     private EmployeeRepository employeeRepository;
+    
+    @Autowired
+    private EventDetailRepository detailRepository;
     
     
     public List<AdminTableData> getAllAdminTableData() {
@@ -229,6 +233,22 @@ public class AdminTablesDataService {
     	List<EmployeeRepo> employeeRepoList = new ArrayList<>();
     	CollectionUtils.addAll(employeeRepoList, employeeRepository.findAll());
     	return EmployeeBeanUtils.getEmployeeList(employeeRepoList);
+    }
+    
+    public List<Event> getEventLookUpData() {
+    	List<Event> tmpEventData = getAllEventData();
+    	List<Event> eventData = new ArrayList();
+    	//TODO EMAIL Yet to be trigger Indicator
+    	for (Event event: tmpEventData) {
+    		event.setParticipated_count(detailRepository.getCountBasedOnParticipationStatus(event.getEventId(), "Attended"));
+    		event.setUnregistered_count(detailRepository.getCountBasedOnParticipationStatus(event.getEventId(), "Unregistered"));
+    		event.setFailed_to_attend_count(detailRepository.getCountBasedOnParticipationStatus(event.getEventId(), "Failed To Attend"));
+    		event.setSubmitted_rating(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Submitted"));
+    		event.setSubmitted_reason_rfa(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Submitted"));
+    		event.setSubmitted_reason_ur(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Submitted"));
+    		eventData.add(event);
+    	}
+    	return eventData;
     }
 
 }

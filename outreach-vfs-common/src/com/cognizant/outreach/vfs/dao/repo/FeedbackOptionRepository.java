@@ -1,5 +1,7 @@
 package com.cognizant.outreach.vfs.dao.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +15,9 @@ public interface FeedbackOptionRepository extends CrudRepository<FeedbackOptionR
 	
 	@Query("SELECT e FROM FeedbackOptionRepo e WHERE e.description = :option")
 	FeedbackOptionRepo findByFeedbackOption(@Param("option") String option);
+	
+	@Query("SELECT e.description FROM FeedbackOptionRepo e")
+	List<String> findAllFeedbackOptions();
 
 }
 

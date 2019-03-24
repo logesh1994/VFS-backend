@@ -73,6 +73,72 @@ public class Event implements Serializable {
 	
 	@JsonProperty("Created By")
 	private int created_by_id;
+	
+	@JsonProperty("Participation Count")
+	private int participated_count;
+	
+	@JsonProperty("Unregistered Count")
+	private int unregistered_count;
+	
+	@JsonProperty("Failed To attend Count")
+	private int failed_to_attend_count;
+	
+	@JsonProperty("Submitted Rating Count")
+	private int submitted_rating;
+	
+	@JsonProperty("Submitted Reason Count(RFA)")
+	private int submitted_reason_rfa;
+	
+	@JsonProperty("Submitted Reason Count(UR)")
+	private int submitted_reason_ur;
+
+	public int getParticipated_count() {
+		return participated_count;
+	}
+
+	public void setParticipated_count(int participated_count) {
+		this.participated_count = participated_count;
+	}
+
+	public int getUnregistered_count() {
+		return unregistered_count;
+	}
+
+	public void setUnregistered_count(int unregistered_count) {
+		this.unregistered_count = unregistered_count;
+	}
+
+	public int getFailed_to_attend_count() {
+		return failed_to_attend_count;
+	}
+
+	public void setFailed_to_attend_count(int failed_to_attend_count) {
+		this.failed_to_attend_count = failed_to_attend_count;
+	}
+
+	public int getSubmitted_rating() {
+		return submitted_rating;
+	}
+
+	public void setSubmitted_rating(int submitted_rating) {
+		this.submitted_rating = submitted_rating;
+	}
+
+	public int getSubmitted_reason_rfa() {
+		return submitted_reason_rfa;
+	}
+
+	public void setSubmitted_reason_rfa(int submitted_reason_rfa) {
+		this.submitted_reason_rfa = submitted_reason_rfa;
+	}
+
+	public int getSubmitted_reason_ur() {
+		return submitted_reason_ur;
+	}
+
+	public void setSubmitted_reason_ur(int submitted_reason_ur) {
+		this.submitted_reason_ur = submitted_reason_ur;
+	}
 
 	public String getEventId() {
 		return eventId;

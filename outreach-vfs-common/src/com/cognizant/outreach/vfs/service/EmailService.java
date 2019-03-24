@@ -63,10 +63,10 @@ public class EmailService {
 			messageBodyPart.setContent(htmlText, "text/html");
 
 			multipart.addBodyPart(messageBodyPart);
-//			multipart.addBodyPart(getMessageBodyPart("Cognizant_Outreach_Logo.png", "Cognizant_Outreach_Logo"));
-//			multipart.addBodyPart(getMessageBodyPart("divider.png", "divider"));
-//			multipart.addBodyPart(getMessageBodyPart("rounder-dwn.png", "rounder-dwn"));
-//			multipart.addBodyPart(getMessageBodyPart("rounder-up.png", "rounder-up"));
+			multipart.addBodyPart(getMessageBodyPart("Cognizant_Outreach_Logo.png", "Cognizant_Outreach_Logo"));
+			multipart.addBodyPart(getMessageBodyPart("divider.png", "divider"));
+			multipart.addBodyPart(getMessageBodyPart("rounder-dwn.png", "rounder-dwn"));
+			multipart.addBodyPart(getMessageBodyPart("rounder-up.png", "rounder-up"));
 
 			message.setContent(multipart);
 			Transport.send(message);
@@ -80,7 +80,9 @@ public class EmailService {
 	}
 	
 	public BodyPart getMessageBodyPart(String sourceName, String contentId) throws Exception {
-		DataSource datasource = new FileDataSource(Thread.currentThread().getContextClassLoader().getResource(sourceName).getFile());
+	    DataSource datasource = new FileDataSource(Thread.currentThread().getContextClassLoader().getResource(sourceName).getFile());
+//		ClassLoader classLoader = getClass().getClassLoader();
+//		DataSource datasource = new FileDataSource(classLoader.getResource(sourceName).getFile());
 		BodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setDataHandler(new DataHandler(datasource));
 		messageBodyPart.setHeader("Content-ID", "<" + contentId + ">");
