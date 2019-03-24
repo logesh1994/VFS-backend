@@ -48,7 +48,7 @@ VALUES
 INSERT INTO `outreach_vfs`.`status`
 (`description`)
 VALUES
-('Active'), ('InProgress'), ('Registered'), ('Failed To Attend'), ('Completed'), ('Attended');
+('Active'), ('UnRegistered'), ('Registered'), ('Failed To Attend'), ('Completed'), ('Attended');
 
 INSERT INTO `outreach_vfs`.`project`
 (`description`)
@@ -96,23 +96,49 @@ INSERT INTO `outreach_vfs`.`event`
 VALUES
 (123456, 'JAN',1,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
 1,1,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512642',
+10,20,10,30,100,4,1,519847),
+('EVNT00046103', 'JAN',1,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
+1,1,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512642',
 10,20,10,30,100,4,1,519847);
 
 INSERT INTO `outreach_vfs`.`event_details`
 (`evnt_id`,`employee_id`,`volunteer_hrs`,`travel_hrs`,`participation_status_id`,
 `feedback_status_id`,`created_by_id`)
 VALUES
-(123456,512641,2,1,3,2,512641);
+(123456,512641,2,1,2,2,512641),
+(123456,512641,2,1,4,2,512641),
+(123456,512641,2,1,6,2,512641),
+(123456,512641,2,1,2,2,512641),
+(123456,512641,2,1,4,2,512641),
+(123456,512641,2,1,6,2,512641);
 
 INSERT INTO `outreach_vfs`.`event_details`
 (`evnt_id`,`employee_id`,`volunteer_hrs`,`travel_hrs`,`participation_status_id`,
 `feedback_status_id`,`created_by_id`)
 VALUES
-('EVNT00046103',512641,2,1,3,2,512641);
+('EVNT00046103',512641,2,1,2,2,512641),
+('EVNT00046103',512641,2,1,4,2,512641),
+('EVNT00046103',512641,2,1,6,2,512641),
+('EVNT00046103',512641,2,1,2,2,512641),
+('EVNT00046103',512641,2,1,4,2,512641),
+('EVNT00046103',512641,2,1,6,2,512641);
 
 
 INSERT INTO `outreach_vfs`.`feedback`
 (`event_detail_id`,`rating`,`feedback_option_id`,`like_feedback`,`improve_feedback`,`admin_feedback`,
 `update_id`)
 VALUES
-(1,1,2,'Enjoyed it','Food Taste','Looking into it', 512641);
+(1,1,1,'Enjoyed it','Food Taste','Looking into it', 512641),
+(2,2,2,'Enjoyed it','Food Taste','Looking into it', 512641),
+(3,3,3,'Enjoyed it','Food Taste','Looking into it', 512641),
+(4,4,4,'Enjoyed it','Food Taste','Looking into it', 512641),
+(5,5,5,'Enjoyed it','Food Taste','Looking into it', 512641),
+(6,1,1,'Enjoyed it','Food Taste','Looking into it', 512641),
+(7,2,2,'Enjoyed it','Food Taste','Looking into it', 512641),
+(8,3,3,'Enjoyed it','Food Taste','Looking into it', 512641),
+(9,4,4,'Enjoyed it','Food Taste','Looking into it', 512641),
+(10,5,5,'Enjoyed it','Food Taste','Looking into it', 512641),
+(11,1,1,'Enjoyed it','Food Taste','Looking into it', 512641),
+(12,2,2,'Enjoyed it','Food Taste','Looking into it', 512641),
+(13,3,3,'Enjoyed it','Food Taste','Looking into it', 512641),
+(14,4,4,'Enjoyed it','Food Taste','Looking into it', 512641);
