@@ -21,8 +21,7 @@ public class EmployeeService {
     
     public Employee getEmployeeByLoginId(int loginId) {
     	EmployeeRepo employeeRepo = employeeRepository.findByLoginId(loginId);
-    	return EmployeeBeanUtils.getEmployee(employeeRepo);
-    	//return null;
+    	return EmployeeBeanUtils.getEmployee(employeeRepo, new Employee());
     }
     
 }

@@ -48,7 +48,7 @@ VALUES
 INSERT INTO `outreach_vfs`.`status`
 (`description`)
 VALUES
-('Active'), ('UnRegistered'), ('Registered'), ('Failed To Attend'), ('Completed'), ('Attended');
+('Active'), ('Unregistered'), ('Registered'), ('Failed To Attend'), ('Completed'), ('Attended'), ('Yet To Send Mail'), ('Attended'), ('Pending'), ('Submitted');
 
 INSERT INTO `outreach_vfs`.`project`
 (`description`)
@@ -73,8 +73,10 @@ INSERT INTO `outreach_vfs`.`employee`
 `password`,
 `employee_status_id`)
 VALUES
+(512642,
+'Admin', '', ' outreach_admin@cognizant.com','8056245629',1,1,8,1,'admin',1),
 (512641,
-'Logeshwara', 'Raja K', ' logeshwararaja.k@cognizant.com','8056245629',1,1,8,1,'logesh',1);
+'Logeshwara', 'Raja K', ' logeshwararaja.k@cognizant.com','8056245629',1,1,8,2,'logesh',1);
 
 INSERT INTO `outreach_vfs`.`event`
 (`id`,`month`,`evnt_base_location_id`,`evnt_benef_id`,
@@ -98,30 +100,30 @@ VALUES
 1,1,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512642',
 10,20,10,30,100,4,1,519847),
 ('EVNT00046103', 'JAN',1,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
-1,1,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512642',
+2,2,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512642',
 10,20,10,30,100,4,1,519847);
 
 INSERT INTO `outreach_vfs`.`event_details`
 (`evnt_id`,`employee_id`,`volunteer_hrs`,`travel_hrs`,`participation_status_id`,
 `feedback_status_id`,`created_by_id`)
 VALUES
-(123456,512641,2,1,2,2,512641),
-(123456,512641,2,1,4,2,512641),
-(123456,512641,2,1,6,2,512641),
-(123456,512641,2,1,2,2,512641),
-(123456,512641,2,1,4,2,512641),
-(123456,512641,2,1,6,2,512641);
+(123456,512641,2,1,2,7,512641),
+(123456,512641,2,1,4,7,512641),
+(123456,512641,2,1,6,7,512641),
+(123456,512641,2,1,2,7,512641),
+(123456,512641,2,1,4,7,512641),
+(123456,512641,2,1,6,7,512641);
 
 INSERT INTO `outreach_vfs`.`event_details`
 (`evnt_id`,`employee_id`,`volunteer_hrs`,`travel_hrs`,`participation_status_id`,
 `feedback_status_id`,`created_by_id`)
 VALUES
-('EVNT00046103',512641,2,1,2,2,512641),
-('EVNT00046103',512641,2,1,4,2,512641),
-('EVNT00046103',512641,2,1,6,2,512641),
-('EVNT00046103',512641,2,1,2,2,512641),
-('EVNT00046103',512641,2,1,4,2,512641),
-('EVNT00046103',512641,2,1,6,2,512641);
+('EVNT00046103',512641,2,1,2,7,512641),
+('EVNT00046103',512641,2,1,4,7,512641),
+('EVNT00046103',512641,2,1,6,7,512641),
+('EVNT00046103',512641,2,1,2,7,512641),
+('EVNT00046103',512641,2,1,4,7,512641),
+('EVNT00046103',512641,2,1,6,7,512641);
 
 
 INSERT INTO `outreach_vfs`.`feedback`
@@ -139,6 +141,4 @@ VALUES
 (9,4,4,'Enjoyed it','Food Taste','Looking into it', 512641),
 (10,5,5,'Enjoyed it','Food Taste','Looking into it', 512641),
 (11,1,1,'Enjoyed it','Food Taste','Looking into it', 512641),
-(12,2,2,'Enjoyed it','Food Taste','Looking into it', 512641),
-(13,3,3,'Enjoyed it','Food Taste','Looking into it', 512641),
-(14,4,4,'Enjoyed it','Food Taste','Looking into it', 512641);
+(12,2,2,'Enjoyed it','Food Taste','Looking into it', 512641);

@@ -3,6 +3,7 @@ package com.cognizant.outreach.vfs.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Employee implements Serializable {
@@ -21,6 +22,7 @@ public class Employee implements Serializable {
     @JsonProperty("Contact")
     private String contact;
     
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("Password")
     private String password;
     
@@ -45,6 +47,7 @@ public class Employee implements Serializable {
     @JsonProperty("Location")
     private String location;
     
+    @JsonProperty("isValidUser")
     private boolean is_valid_user;
 	
 	public String getContact() {
