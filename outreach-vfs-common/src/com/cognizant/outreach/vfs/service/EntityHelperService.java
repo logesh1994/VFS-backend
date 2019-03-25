@@ -476,6 +476,7 @@ public class EntityHelperService {
 		}
 		switch (action) {
 		case ADD_ACTION:
+			feedback_stat = statusRepository.findByStatusDescription("Yet To Send Mail");
 			eventDetailRepo = new EventDetailRepo(createdById, travelHrs, volunteerHrs, employeeRepo, eventRepo,
 					participation_stat, feedback_stat);
 			detailRepository.save(eventDetailRepo);

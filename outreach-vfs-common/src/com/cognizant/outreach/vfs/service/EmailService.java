@@ -47,7 +47,7 @@ public class EmailService {
 		});
 	}
 
-	public boolean sendFeedbackMail(String toAddress, String username, String emailContent) {
+	public boolean sendFeedbackMail(String toAddress, String username, String emailContent, String feedbackLink) {
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(appConfig.getValueOfKey("mail.smtp.from")));
@@ -58,7 +58,7 @@ public class EmailService {
 
 			BodyPart messageBodyPart = new MimeBodyPart();
 			String htmlText = EmailTemplate.REGSITERED_AND_PARTICIPATED.replace("#UserName", username)
-					.replace("#emailContent", emailContent);
+					.replace("#emailContent", emailContent).replace("#feedbackLink", feedbackLink);
 
 			messageBodyPart.setContent(htmlText, "text/html");
 
@@ -100,12 +100,22 @@ public class EmailService {
 
 			MimeMultipart multipart = new MimeMultipart("related");
 			BodyPart messageBodyPart = new MimeBodyPart();
+			
+			String htmlText = EmailTemplate.EMAIL_ALERT.replace("#UserName", "Team")
+					.replace("#emailContent", emaiContent);
 
-			messageBodyPart.setContent(emaiContent, "text/html");
-			DataSource datasource = new FileDataSource(attachment);
-			messageBodyPart.setDataHandler(new DataHandler(datasource));
+			messageBodyPart.setContent(htmlText, "text/html");
+			if (attachment != null) {
+				DataSource datasource = new FileDataSource(attachment);
+				messageBodyPart.setDataHandler(new DataHandler(datasource));
+			}
 			multipart.addBodyPart(messageBodyPart);
 
+			multipart.addBodyPart(getMessageBodyPart("Cognizant_Outreach_Logo.png", "Cognizant_Outreach_Logo"));
+			multipart.addBodyPart(getMessageBodyPart("divider.png", "divider"));
+			multipart.addBodyPart(getMessageBodyPart("rounder-dwn.png", "rounder-dwn"));
+			multipart.addBodyPart(getMessageBodyPart("rounder-up.png", "rounder-up"));
+			
 			message.setContent(multipart);
 			Transport.send(message);
 

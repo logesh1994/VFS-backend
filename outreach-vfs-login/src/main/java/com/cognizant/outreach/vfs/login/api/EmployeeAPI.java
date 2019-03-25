@@ -1,21 +1,20 @@
 package com.cognizant.outreach.vfs.login.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cognizant.outreach.vfs.api.response.APIStatus;
+import com.cognizant.outreach.vfs.api.response.StatusResponse;
 import com.cognizant.outreach.vfs.domain.Employee;
 import com.cognizant.outreach.vfs.login.service.EmployeeService;
-import com.cognizant.outreach.vfs.util.*;
-import com.cognizant.outreach.vfs.api.response.*;
+import com.cognizant.outreach.vfs.util.APIUtil;
+import com.cognizant.outreach.vfs.util.ReqMapConstants;
 
 @RestController
 @RequestMapping(ReqMapConstants.LOGIN)

@@ -48,7 +48,7 @@ VALUES
 INSERT INTO `outreach_vfs`.`status`
 (`description`)
 VALUES
-('Active'), ('Unregistered'), ('Registered'), ('Failed To Attend'), ('Completed'), ('Attended'), ('Yet To Send Mail'), ('Attended'), ('Pending'), ('Submitted');
+('Active'), ('Unregistered'), ('Registered'), ('Failed To Attend'), ('Completed'), ('Attended'), ('Yet To Send Mail'), ('Attended'), ('Pending'), ('Submitted'), ('Email Sent');
 
 INSERT INTO `outreach_vfs`.`project`
 (`description`)
@@ -74,9 +74,11 @@ INSERT INTO `outreach_vfs`.`employee`
 `employee_status_id`)
 VALUES
 (512642,
-'Admin', '', ' outreach_admin@cognizant.com','8056245629',1,1,8,1,'admin',1),
+'Admin', '', ' logeshtips@gmail.com','8056245629',1,1,8,1,'admin',1),
 (512641,
-'Logeshwara', 'Raja K', ' logeshwararaja.k@cognizant.com','8056245629',1,1,8,2,'logesh',1);
+'Logeshwara', 'Raja K', ' 512641@cognizant.com','8056245629',1,1,8,2,'logesh',1),
+(512643,
+'Logeshwara', 'Raja K', ' logeshwararaja.k@cognizant.com','8056245629',1,1,8,3,null,1);
 
 INSERT INTO `outreach_vfs`.`event`
 (`id`,`month`,`evnt_base_location_id`,`evnt_benef_id`,
