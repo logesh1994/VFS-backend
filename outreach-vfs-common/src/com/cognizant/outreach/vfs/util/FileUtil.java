@@ -76,7 +76,6 @@ public class FileUtil {
 	}
 
 	public static void readExcelData(String filepath) throws Exception {
-		System.out.println("############################################################");
 		Workbook workbook = WorkbookFactory.create(FileUtils.getFile(filepath));
 		System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
 		System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
@@ -101,7 +100,6 @@ public class FileUtil {
 	}
 
 	public static ArrayList<Map<String, String>> parseExcelToJson(String filepath) throws Exception {
-		System.out.println("############################################################");
 		List<String> keys = new ArrayList<>();
 		Map<String, String> tempObj = null;
 		ArrayList<Map<String, String>> finalList = new ArrayList();
@@ -115,13 +113,9 @@ public class FileUtil {
 		Sheet sheet = workbook.getSheetAt(0);
 		DataFormatter dataFormatter = new DataFormatter();
 		  FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
-
-		  
 		  dataFormatter.addFormat("mm/dd/yy", new java.text.SimpleDateFormat("yyyy-MM-dd"));
 		  dataFormatter.addFormat("m/d/yy", new java.text.SimpleDateFormat("yyyy-MM-dd"));
-		int i = 0;
-		System.out.println("\n\nIterating over Rows and Columns using Java 8 forEach with lambda\n");
-		
+		int i = 0;		
 		for (int rowNum = sheet.getFirstRowNum(); rowNum < sheet.getLastRowNum(); rowNum++) {
 			   Row row = sheet.getRow(rowNum);
 			   if (row == null) {
@@ -133,11 +127,8 @@ public class FileUtil {
 			      Cell cell = row.getCell(cn, MissingCellPolicy.RETURN_BLANK_AS_NULL);
 			      if (cell == null) {
 			    	  tempObj.put(keys.get(i), null);
-			    	  System.out.println("CELL is NULL");
 			      } else {
-			    	//  cell = row.getCell(cn, MissingCellPolicy.RETURN_BLANK_AS_NULL);
 						String cellValue = dataFormatter.formatCellValue(cell, evaluator);
-						System.out.print(cellValue + "\t");
 						if (row.getRowNum() == 0) {
 							keys.add(cellValue);
 						} else {
@@ -147,30 +138,9 @@ public class FileUtil {
 			      i++;
 			   }
 			   finalList.add(tempObj);
-			   System.out.println();
+			   
 			}
-		
-//		for (Row row : sheet) {
-//			i = 0;
-//			tempObj = new HashMap<>();
-//			for (Cell cell : row) {
-//				cell = row.getCell(cell.getColumnIndex(), MissingCellPolicy.RETURN_BLANK_AS_NULL);
-//				String cellValue = dataFormatter.formatCellValue(cell, evaluator);
-//				System.out.print(cellValue + "\t");
-//				if (row.getRowNum() == 0) {
-//					keys.add(cellValue);
-//				} else {
-//					tempObj.put(keys.get(i), cellValue);
-//				}
-//				i++;
-//			}
-//			finalList.add(tempObj);
-//			System.out.println();
-//		}
-		System.out.println(keys);
-		System.out.println(finalList);
 
-		// Closing the workbook
 		workbook.close();
 		return finalList;
 	}

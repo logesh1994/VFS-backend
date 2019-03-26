@@ -1,5 +1,6 @@
 package com.cognizant.outreach.vfs.service;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,9 +62,9 @@ public class EntityHelperService {
 	private static final String DELETE_ACTION = "DELETE";
 	private static final String ADD_ACTION = "ADD";
 
-	public LocationRepo addLocationRepo(String cityName, String state, String country, int id, String action) {
+	public LocationRepo addLocationRepo(String cityName, String state, String country, Integer id, String action) {
 		LocationRepo locationRepo = null;
-		if (id != 0) {
+		if (id != null) {
 			locationRepo = locationRepository.findByLocationId(id);
 		}
 		switch (action) {
@@ -90,12 +91,12 @@ public class EntityHelperService {
 		return locationRepo;
 	}
 
-	public BusinessUnitRepo addBusinessUnitRepo(String buName, String location, int id, String action) {
+	public BusinessUnitRepo addBusinessUnitRepo(String buName, String location, Integer id, String action) {
 		BusinessUnitRepo businessUnitRepo = null;
-		if (id != 0) {
+		if (id != null) {
 			businessUnitRepo = businessUnitRepository.findByBusinessUintId(id);
 		}
-		LocationRepo locationRepo = addLocationRepo(location, null, null, 0, ADD_ACTION);
+		LocationRepo locationRepo = addLocationRepo(location, null, null, null, ADD_ACTION);
 		switch (action) {
 		case ADD_ACTION:
 			businessUnitRepo = businessUnitRepository.findByBusinessUnitName(buName);
@@ -119,9 +120,9 @@ public class EntityHelperService {
 		return businessUnitRepo;
 	}
 
-	public EventBeneficiaryRepo addEventBeneficiaryRepo(String beneficiaryName, int id, String action) {
+	public EventBeneficiaryRepo addEventBeneficiaryRepo(String beneficiaryName, Integer id, String action) {
 		EventBeneficiaryRepo repo = null;
-		if (id != 0) {
+		if (id != null) {
 			repo = eventBeneficiaryRepository.findByEventBeneficiaryId(id);
 		}
 		switch (action) {
@@ -146,9 +147,9 @@ public class EntityHelperService {
 		return repo;
 	}
 
-	public CategoryRepo addCategoryRepo(String category, int id, String action) {
+	public CategoryRepo addCategoryRepo(String category, Integer id, String action) {
 		CategoryRepo categoryRepo = null;
-		if (id != 0) {
+		if (id != null) {
 			categoryRepo = categoryRepository.findByCategoryId(id);
 		}
 		switch (action) {
@@ -173,10 +174,10 @@ public class EntityHelperService {
 		return categoryRepo;
 	}
 
-	public EmployeeRepo addEmployee(int employeeId) {
+	public EmployeeRepo addEmployee(int employeeId, RoleLookupRepo role) {
 		EmployeeRepo employeeRepo = employeeRepository.findByLoginId(employeeId);
 		if (employeeRepo == null) {
-			employeeRepo = new EmployeeRepo(employeeId, employeeId + Constants.COGNIZANT_MAIL);
+			employeeRepo = new EmployeeRepo(employeeId, employeeId + Constants.COGNIZANT_MAIL, role);
 			employeeRepository.save(employeeRepo);
 		}
 		return employeeRepo;
@@ -220,10 +221,10 @@ public class EntityHelperService {
 		return employeeRepo;
 	}
 
-	public EventCouncilRepo addEventCouncilRepo(String eventCouncilName, String location, int id, String action) {
+	public EventCouncilRepo addEventCouncilRepo(String eventCouncilName, String location, Integer id, String action) {
 		EventCouncilRepo repo = null;
-		LocationRepo locationRepo = addLocationRepo(location, null, null, 0, ADD_ACTION);
-		if (id != 0) {
+		LocationRepo locationRepo = addLocationRepo(location, null, null, null, ADD_ACTION);
+		if (id != null) {
 			repo = councilRepository.findByEventCouncilId(id);
 		}
 		switch (action) {
@@ -249,9 +250,9 @@ public class EntityHelperService {
 		return repo;
 	}
 
-	public FeedbackOptionRepo addFeedbackOptionRepo(String option, int id, String action) {
+	public FeedbackOptionRepo addFeedbackOptionRepo(String option, Integer id, String action) {
 		FeedbackOptionRepo repo = null;
-		if (id != 0) {
+		if (id != null) {
 			repo = feedbackOptionRepository.findByFeedbackOptionId(id);
 		}
 		switch (action) {
@@ -276,9 +277,9 @@ public class EntityHelperService {
 		return repo;
 	}
 
-	public IiepCategoryRepo addIiepCategoryRepo(String category, int id, String action) {
+	public IiepCategoryRepo addIiepCategoryRepo(String category, Integer id, String action) {
 		IiepCategoryRepo repo = null;
-		if (id != 0) {
+		if (id != null) {
 			repo = iiepCategoryRepository.findByIiepCategoryId(id);
 		}
 		switch (action) {
@@ -303,9 +304,9 @@ public class EntityHelperService {
 		return repo;
 	}
 
-	public ProjectRepo addProjectRepo(String projectName, int id, String action) {
+	public ProjectRepo addProjectRepo(String projectName, Integer id, String action) {
 		ProjectRepo repo = null;
-		if (id != 0) {
+		if (id != null) {
 			repo = projectRepository.findByProjectId(id);
 		}
 		switch (action) {
@@ -330,9 +331,9 @@ public class EntityHelperService {
 		return repo;
 	}
 
-	public RatingRepo addRatingRepo(String rating, int id, String action) {
+	public RatingRepo addRatingRepo(String rating, Integer id, String action) {
 		RatingRepo repo = null;
-		if (id != 0) {
+		if (id != null) {
 			repo = ratingRepository.findByRatingId(id);
 		}
 		switch (action) {
@@ -357,9 +358,9 @@ public class EntityHelperService {
 		return repo;
 	}
 
-	public RoleLookupRepo addRoleRepo(String role, int id, String action) {
+	public RoleLookupRepo addRoleRepo(String role, Integer id, String action) {
 		RoleLookupRepo repo = null;
-		if (id != 0) {
+		if (id != null) {
 			repo = roleRepository.findByRoleId(id);
 		}
 		switch (action) {
@@ -384,9 +385,9 @@ public class EntityHelperService {
 		return repo;
 	}
 
-	public StatusRepo addStatusRepo(String status, int id, String action) {
+	public StatusRepo addStatusRepo(String status, Integer id, String action) {
 		StatusRepo repo = null;
-		if (id != 0) {
+		if (id != null) {
 			repo = statusRepository.findByStatusId(id);
 		}
 		switch (action) {
@@ -416,12 +417,20 @@ public class EntityHelperService {
 			float totalVolunteerHrs, int totalVolunteers, String venueAddress, String eventCouncil, String iiepCategory,
 			String location, String eventBeneficiary, String project, String category, String action) throws Exception {
 		EventRepo eventRepo = eventRepository.findByEventId(id);
-		LocationRepo locationRepo = addLocationRepo(location, null, null, 0, ADD_ACTION);
-		EventCouncilRepo councilRepo = addEventCouncilRepo(eventCouncil, location, 0, ADD_ACTION);
-		EventBeneficiaryRepo beneficiaryRepo = addEventBeneficiaryRepo(eventBeneficiary, 0, ADD_ACTION);
-		IiepCategoryRepo iiepCategoryRepo = addIiepCategoryRepo(iiepCategory, 0, ADD_ACTION);
-		ProjectRepo projectRepo = addProjectRepo(project, 0, ADD_ACTION);
-		CategoryRepo categoryRepo = addCategoryRepo(category, 0, ADD_ACTION);
+		LocationRepo locationRepo = addLocationRepo(location, null, null, null, ADD_ACTION);
+		EventCouncilRepo councilRepo = addEventCouncilRepo(eventCouncil, location, null, ADD_ACTION);
+		EventBeneficiaryRepo beneficiaryRepo = addEventBeneficiaryRepo(eventBeneficiary, null, ADD_ACTION);
+		IiepCategoryRepo iiepCategoryRepo = addIiepCategoryRepo(iiepCategory, null, ADD_ACTION);
+		ProjectRepo projectRepo = addProjectRepo(project, null, ADD_ACTION);
+		CategoryRepo categoryRepo = addCategoryRepo(category, null, ADD_ACTION);
+		
+		if(eventPoc_s != null) {
+			RoleLookupRepo role = roleRepository.findByRoleDescription("POC");
+			for (String pocId: Arrays.asList(eventPoc_s.split(","))) {
+				addEmployee(Integer.parseInt(pocId), role);
+			}
+		}
+		
 		switch (action) {
 		case ADD_ACTION:
 			if (eventRepo == null && id != null) {
@@ -464,14 +473,14 @@ public class EntityHelperService {
 	}
 
 	public EventDetailRepo addEventDetailRepo(int createdById, float travelHrs, float volunteerHrs, int employee_id,
-			String event_id, String participation_status, String feedback_status, int id, String action) {
+			String event_id, String participation_status, String feedback_status, Integer id, String action) {
 		EventDetailRepo eventDetailRepo = null;
-		EmployeeRepo employeeRepo = addEmployee(employee_id);
+		EmployeeRepo employeeRepo = addEmployee(employee_id, null);
 		// Assuming Event Summary has been saved
 		EventRepo eventRepo = eventRepository.findByEventId(event_id);
 		StatusRepo participation_stat = addStatusRepo(participation_status, 0, ADD_ACTION);
 		StatusRepo feedback_stat = addStatusRepo(feedback_status, 0, ADD_ACTION);
-		if (id != 0) {
+		if (id != null) {
 			eventDetailRepo = detailRepository.findByEventDetailId(id);
 		}
 		switch (action) {
@@ -502,19 +511,19 @@ public class EntityHelperService {
 	}
 
 	public FeedbackRepo addFeedbackData(String improveFeedback, String likeFeedback, int employee_id,
-			int eventDetail_id, String feedbackOption, String rating, int id, String action) {
+			int eventDetail_id, String feedbackOption, String rating, Integer id, String action) {
 		FeedbackRepo repo = null;
 		FeedbackOptionRepo option = null;
 		RatingRepo ratingRepo = null;
-		EmployeeRepo employeeRepo = addEmployee(employee_id);
+		EmployeeRepo employeeRepo = addEmployee(employee_id,  null);
 		EventDetailRepo eventDetail = detailRepository.findByEventDetailId(eventDetail_id);
 		if (feedbackOption != null) {
-			option = addFeedbackOptionRepo(feedbackOption, 0, ADD_ACTION);
+			option = addFeedbackOptionRepo(feedbackOption, null, ADD_ACTION);
 		}
 		if (rating != null) {
-			ratingRepo = addRatingRepo(rating, 0, ADD_ACTION);
+			ratingRepo = addRatingRepo(rating, null, ADD_ACTION);
 		}
-		if (id != 0) {
+		if (id != null) {
 			repo = feedbackRepository.findByFeedbackId(id);
 		}
 		switch (action) {

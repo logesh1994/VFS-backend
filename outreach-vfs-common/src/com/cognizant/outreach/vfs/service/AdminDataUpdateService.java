@@ -16,7 +16,6 @@ public class AdminDataUpdateService {
 	private EntityHelperService entityHelperService;
 
 	public boolean updateAdminData(String tableName, List<Map<String, String>> data, String action) throws Exception {
-		System.out.println(data);
 		switch (tableName) {
 		case "Business Unit":
 			BusinessUnit businessUnit = null;

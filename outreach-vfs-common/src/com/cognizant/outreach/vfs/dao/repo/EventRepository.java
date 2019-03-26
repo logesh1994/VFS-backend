@@ -17,8 +17,14 @@ public interface EventRepository extends CrudRepository<EventRepo, String> {
 	@Query("SELECT e.id FROM EventRepo e WHERE e.evntDate between :fromDate and :toDate")
 	List<String> findEventIdListBetweenDates(@Param("fromDate") Date fromDate,@Param("toDate")  Date toDate);
 	
+	@Query("SELECT e.id FROM EventRepo e WHERE e.eventPoc_s like :pocId and (e.evntDate between :fromDate and :toDate)")
+	List<String> findEventIdListBetweenDatesForPOC(@Param("fromDate") Date fromDate,@Param("toDate")  Date toDate ,@Param("pocId") String pocId);
+	
 	@Query("SELECT e FROM EventRepo e WHERE e.evntDate between :fromDate and :toDate")
 	List<EventRepo> findEventListBetweenDates(@Param("fromDate") Date fromDate,@Param("toDate")  Date toDate);
+	
+	@Query("SELECT e FROM EventRepo e WHERE e.eventPoc_s like :pocId and (e.evntDate between :fromDate and :toDate)")
+	List<EventRepo> findEventListBetweenDatesForPOC(@Param("fromDate") Date fromDate,@Param("toDate")  Date toDate ,@Param("pocId") String pocId);
 
 }
 

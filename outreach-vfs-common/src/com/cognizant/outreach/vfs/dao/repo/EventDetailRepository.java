@@ -21,6 +21,9 @@ public interface EventDetailRepository extends CrudRepository<EventDetailRepo, I
 	
 	@Query("SELECT e FROM EventDetailRepo e WHERE e.event.id = :eventId and  e.status2.description = :status")
 	List<EventDetailRepo> findBasedOnFeedbackStatus(@Param("eventId") String eventId, @Param("status") String status);
+	
+	@Query("SELECT e FROM EventDetailRepo e WHERE e.event.eventPoc_s like :pocId")
+	List<EventDetailRepo> findAllBasedOnPOCId(@Param("pocId") String pocId);
 
 }
 

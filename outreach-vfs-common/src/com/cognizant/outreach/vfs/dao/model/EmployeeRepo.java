@@ -73,10 +73,11 @@ public class EmployeeRepo implements Serializable {
 	public EmployeeRepo() {
 	}
 
-	public EmployeeRepo(int employeeId, String empEmail) {
+	public EmployeeRepo(int employeeId, String empEmail, RoleLookupRepo role) {
 		super();
 		this.employeeId = employeeId;
 		this.empEmail = empEmail;
+		this.roleLookup = role;
 	}
 
 	public EmployeeRepo(int employeeId, String contact, String empEmail, String empFirstName, String empLastName,

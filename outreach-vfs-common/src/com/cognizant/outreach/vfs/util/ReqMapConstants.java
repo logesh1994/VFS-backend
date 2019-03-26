@@ -26,7 +26,7 @@ public class ReqMapConstants {
   //Admin API
     public static final String ADMIN = VFS+VERSION + "/admin";
 	public static final String GET_ADMIN_DATA = "/getAdminData";
-	public static final String GET_EVENTDETAILS_DATA = "/getEventDetailsData";
+	public static final String GET_EVENTDETAILS_DATA = "/getEventDetailsData/{employeeId}";
 	public static final String UPDATE_ADMIN_DATA = "/updateAdminData";
 	public static final String GET_INSIGHT_DATA = "/getInsights";
 	public static final String GET_EVENT_SUMMARY_DATA = "/getEventDataList";

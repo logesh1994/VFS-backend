@@ -46,7 +46,6 @@ public class FeedbackService {
 					feedbackTemplate.setDisplay_message("Please share your Feedback for the Outreach event \""
 							+ eventDetailRepo.getEvent().getEvntName() +"\" that you attended on " + eventDetailRepo.getEvent().getEvntDate());
 				} else {
-					//TODO Check the message to be displayed
 					feedbackTemplate.setDisplay_message("Please share your Feedback for the Outreach event \""
 							+ eventDetailRepo.getEvent().getEvntName() +"\" that you missed to attend on " + eventDetailRepo.getEvent().getEvntDate());
 					feedbackTemplate.setFeedback_type("RFA");
@@ -61,8 +60,6 @@ public class FeedbackService {
 				feedbackTemplate.setDisplay_message("You have alreday submitted feedback for Outreach event \""
 						+ eventDetailRepo.getEvent().getEvntName() +"\" that Occured on " + eventDetailRepo.getEvent().getEvntDate());
 			}
-		} else {
-			//TODO Incorrect URL Throw Exception and then set API Status Accordingly
 		}
 		return feedbackTemplate;
 	}

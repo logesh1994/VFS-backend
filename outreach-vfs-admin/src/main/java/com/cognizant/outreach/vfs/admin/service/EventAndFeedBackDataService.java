@@ -28,16 +28,24 @@ public class EventAndFeedBackDataService {
 	private FeedbackRepository feedbackRepository;
 	
 	
-	public List<AdminTableData> getEventDetailsAndFeedbackDetails() {
+	public List<AdminTableData> getEventDetailsAndFeedbackDetails(String employeeId, String role) {
 		List<AdminTableData> adminTableDataList = new ArrayList<>();
 
-    	adminTableDataList.add(new AdminTableData("Event Details",
-    			AdminTableUtils.ADMIN_TABLE_COLUMN_MAP.get("Event Details"), 
-    			getAllEventDetailData()));
-    	adminTableDataList.add(new AdminTableData("Feedback",
-    			AdminTableUtils.ADMIN_TABLE_COLUMN_MAP.get("Feedback"), 
-    			getAllFeedbackData()));
-    	
+		if(role.equals("Admin")) {
+			adminTableDataList.add(new AdminTableData("Event Details",
+	    			AdminTableUtils.ADMIN_TABLE_COLUMN_MAP.get("Event Details"), 
+	    			getAllEventDetailData()));
+	    	adminTableDataList.add(new AdminTableData("Feedback",
+	    			AdminTableUtils.ADMIN_TABLE_COLUMN_MAP.get("Feedback"), 
+	    			getAllFeedbackData()));
+		} else {
+			adminTableDataList.add(new AdminTableData("Event Details",
+	    			AdminTableUtils.ADMIN_TABLE_COLUMN_MAP.get("Event Details"), 
+	    			getAllEventDetailDataForPOC(employeeId)));
+	    	adminTableDataList.add(new AdminTableData("Feedback",
+	    			AdminTableUtils.ADMIN_TABLE_COLUMN_MAP.get("Feedback"), 
+	    			getAllFeedbackDataForPOC(employeeId)));
+		}
     	return adminTableDataList;
 	}
 	
@@ -47,9 +55,22 @@ public class EventAndFeedBackDataService {
     	return EventDetailsBeanUtils.getEventDetailsList(eventDetailRepoList);
     }
 	
+	public List<EventDetails> getAllEventDetailDataForPOC(String id) {
+    	List<EventDetailRepo> eventDetailRepoList = new ArrayList<>();
+    	CollectionUtils.addAll(eventDetailRepoList, eventDetailRepository.findAllBasedOnPOCId("%" + id +"%"));
+    	return EventDetailsBeanUtils.getEventDetailsList(eventDetailRepoList);
+    }
+	
 	public List<Feedback> getAllFeedbackData() {
     	List<FeedbackRepo> feedbackRepoList = new ArrayList<>();
     	CollectionUtils.addAll(feedbackRepoList, feedbackRepository.findAll());
+    	return FeedbackBeanUtils.getFeedbackList(feedbackRepoList);
+    }
+	
+
+	public List<Feedback> getAllFeedbackDataForPOC(String id) {
+    	List<FeedbackRepo> feedbackRepoList = new ArrayList<>();
+    	CollectionUtils.addAll(feedbackRepoList, feedbackRepository.findAllByEventPOC("%" + id +"%"));
     	return FeedbackBeanUtils.getFeedbackList(feedbackRepoList);
     }
 	

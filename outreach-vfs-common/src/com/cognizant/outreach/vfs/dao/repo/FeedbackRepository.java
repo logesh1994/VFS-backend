@@ -19,6 +19,9 @@ public interface FeedbackRepository extends CrudRepository<FeedbackRepo, Integer
 	
 	@Query("SELECT e FROM FeedbackRepo e WHERE e.eventDetail.event.id in (:eventId) and e.eventDetail.status1.description = :status ")
 	List<FeedbackRepo> findRatingDataForEventIdAndStatus(@Param("eventId") List<String> eventId, @Param("status") String status);
+	
+	@Query("SELECT e FROM FeedbackRepo e WHERE e.eventDetail.event.eventPoc_s like :pocId")
+	List<FeedbackRepo> findAllByEventPOC(@Param("pocId") String pocId);
 
 }
 

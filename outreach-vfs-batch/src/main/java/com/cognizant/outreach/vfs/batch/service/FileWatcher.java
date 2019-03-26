@@ -9,6 +9,7 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.outreach.vfs.config.AppConfig;
+import com.cognizant.outreach.vfs.dao.model.EmployeeRepo;
+import com.cognizant.outreach.vfs.dao.repo.EmployeeRepository;
 import com.cognizant.outreach.vfs.service.AdminDataUpdateService;
 import com.cognizant.outreach.vfs.service.EmailService;
 import com.cognizant.outreach.vfs.util.AdminTableUtils;
@@ -38,15 +41,15 @@ public class FileWatcher {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	private static final Logger logger = LogManager.getLogger(FileWatcher.class.getName());
 	private Map<String, String> modified_file_list = new HashMap();
 
 	@PostConstruct
 	public void watchService() throws Exception {
-		
-		emailService.sendFeedbackMail("512641@cognizant.com", "KL Raja", "Thank you for your participation in the Outreach Event \"Be a Teacher\" on \"15/03/2019\"");
-		
 		String last_modified_time = null;
 		boolean filePatternMatch = false;
 		WatchService watchService = FileSystems.getDefault().newWatchService();
@@ -61,13 +64,12 @@ public class FileWatcher {
 				
 				Path filename = (Path) event.context();
 				for (String fileNamePattern : AdminTableUtils.ADMIN_TABLE_COLUMN_MAP.keySet()) {
-					System.out.println(fileNamePattern);
 					filePatternMatch = filename.getFileName().toString().equals(fileNamePattern + Constants.EXCEL_EXTENSION);
 					if (filePatternMatch) break;
 				}
 				
 				if (filePatternMatch) {
-						File file = new File(appConfig.getValueOfKey(Constants.FILE_PATH)+appConfig.getValueOfKey(Constants.FILE_NAME));	
+						File file = new File(appConfig.getValueOfKey(Constants.FILE_PATH)+filename);	
 						SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 						last_modified_time = modified_file_list.get(filename.toString());
 						logger.debug("Last Modified: " + sdf.format(file.lastModified()));
@@ -84,6 +86,12 @@ public class FileWatcher {
 						FileUtils.moveFile(FileUtils.getFile(appConfig.getValueOfKey(Constants.INPROGRESS_FILEPATH)+filename),
 								FileUtils.getFile(appConfig.getValueOfKey(Constants.COMPLETED_FILEPATH)+filename.toString().replace(Constants.EXCEL_EXTENSION, "")
 										+"_"+System.currentTimeMillis()+Constants.EXCEL_EXTENSION));
+						
+						String email_dl = "";
+						for (EmployeeRepo repo: employeeRepository.findListbyRole(Arrays.asList("Admin", "POC"))) {
+							email_dl = email_dl + "," + repo.getEmpEmail();
+						}
+						emailService.sendEmaiAlert(email_dl, "File: "+ filename + " has been Processed Successfully", null);	
 				}
 				filePatternMatch = false;
 			}

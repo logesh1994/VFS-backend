@@ -29,7 +29,7 @@ public class FeedbackAPI extends APIUtil {
 
 	@RequestMapping(value = ReqMapConstants.RETRIEVE_FEEDBACK_TEMPLATE, method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
 	public String retrieveFeedbackTemplate(@RequestBody FeedbackTemplate request) {
-		StatusResponse response = new StatusResponse();
+		StatusResponse<FeedbackTemplate> response = new StatusResponse<FeedbackTemplate>();
 		try {
 			int event_detail_id = Integer.parseInt(request.getEvent_id());
 			int employee_id = Integer.parseInt(request.getEmployee_id());
@@ -50,7 +50,7 @@ public class FeedbackAPI extends APIUtil {
 
 	@RequestMapping(value = ReqMapConstants.SAVE_FEEDBACK, method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
 	public String saveFeedback(@RequestBody Feedback request) {
-		StatusResponse response = new StatusResponse();
+		StatusResponse<FeedbackTemplate> response = new StatusResponse<FeedbackTemplate>();
 		try {
 			response.setResult(feedbackService.saveFeedbackData(request));
 			response.setStatus(APIStatus.OK);

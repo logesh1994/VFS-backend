@@ -20,6 +20,8 @@ import com.cognizant.outreach.vfs.admin.service.EventAndFeedBackDataService;
 import com.cognizant.outreach.vfs.admin.service.InsightsDataService;
 import com.cognizant.outreach.vfs.api.response.APIStatus;
 import com.cognizant.outreach.vfs.api.response.StatusResponse;
+import com.cognizant.outreach.vfs.dao.model.EmployeeRepo;
+import com.cognizant.outreach.vfs.dao.repo.EmployeeRepository;
 import com.cognizant.outreach.vfs.domain.AdminUpdateData;
 import com.cognizant.outreach.vfs.domain.ChartData;
 import com.cognizant.outreach.vfs.domain.DataSets;
@@ -32,109 +34,135 @@ import com.cognizant.outreach.vfs.util.ReqMapConstants;
 @RequestMapping(ReqMapConstants.ADMIN)
 @CrossOrigin(origins = "http://localhost:4200")
 public class AdminAPI extends APIUtil {
-	
+
 	private static final Logger logger = LogManager.getLogger(AdminAPI.class.getName());
-	
+
 	@Autowired
 	private AdminTablesDataService adminService;
-	
+
 	@Autowired
 	private EventAndFeedBackDataService eventAndFeedBackDataService;
-	
+
 	@Autowired
 	private AdminDataUpdateService adminDataUpdateService;
-	
+
 	@Autowired
 	private InsightsDataService insightsDataService;
-	
-    @Autowired
+
+	@Autowired
 	private EmailBatchService emailBatchService;
 	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
-    @RequestMapping(value = ReqMapConstants.GET_ADMIN_DATA, 
-    		method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
-    public String getAdminData() {
-    	//TODO add try catch
-    	StatusResponse response = new StatusResponse();
-    	response.setResult(adminService.getAllAdminTableData());
-    	response.setStatus(APIStatus.OK);
-    	return writeObjectToJson(response);
-    }
-    
-    @RequestMapping(value = ReqMapConstants.GET_EVENTDETAILS_DATA, 
-    		method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
-    public String getEventDetailsAndFeedbackData() {
-    	//TODO add try catch
-    	StatusResponse response = new StatusResponse();
-    	response.setResult(eventAndFeedBackDataService.getEventDetailsAndFeedbackDetails());
-    	response.setStatus(APIStatus.OK);
-    	return writeObjectToJson(response);
-    }
-    
-    @RequestMapping(value = ReqMapConstants.UPDATE_ADMIN_DATA, 
-    		method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
-    public String updateAdminData(@RequestBody AdminUpdateData payload) {
-    	//TODO add try catch
-    	System.out.println(payload);
-    	StatusResponse response = new StatusResponse();
-    	List<Map<String, String>> data = new ArrayList<>();
-    	try {
-    		for (Object object: payload.getData()) {
-    			System.out.println(object);
-    			data.add((Map<String, String>) object);
-    		}
-    		adminDataUpdateService.updateAdminData(payload.getTable_name(), data, payload.getAction());
+	@SuppressWarnings("finally")
+	@RequestMapping(value = ReqMapConstants.GET_ADMIN_DATA, method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
+	public String getAdminData() {
+		StatusResponse<List<?>> response = new StatusResponse<List<?>>();
+		try {
+			response.setResult(adminService.getAllAdminTableData());
+			response.setStatus(APIStatus.OK);
+		} catch (Exception e) {
+			response.setStatus(APIStatus.BAD);
+
+		} finally {
+			return writeObjectToJson(response);
+		}
+	}
+
+	@SuppressWarnings("finally")
+	@RequestMapping(value = ReqMapConstants.GET_EVENTDETAILS_DATA, method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
+	public String getEventDetailsAndFeedbackData(@PathVariable("employeeId") String employeeId) {
+		StatusResponse<List<?>> response = new StatusResponse<List<?>>();
+		try {
+			EmployeeRepo employee = employeeRepository.findByLoginId(Integer.parseInt(employeeId));
+			if (employee != null && employee.getRoleLookup() != null &&
+					(employee.getRoleLookup().getDescription().equals("Admin") ||
+							employee.getRoleLookup().getDescription().equals("POC"))) {
+				response.setResult(eventAndFeedBackDataService.getEventDetailsAndFeedbackDetails(employeeId, employee.getRoleLookup().getDescription()));
+				response.setStatus(APIStatus.OK);
+			} else {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			response.setStatus(APIStatus.BAD);
+		} finally {
+			return writeObjectToJson(response);
+		}
+	}
+
+	@SuppressWarnings({ "finally", "unchecked" })
+	@RequestMapping(value = ReqMapConstants.UPDATE_ADMIN_DATA, method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
+	public String updateAdminData(@RequestBody AdminUpdateData payload) {
+		StatusResponse<?> response = new StatusResponse();
+		List<Map<String, String>> data = new ArrayList<>();
+		try {
+			for (Object object : payload.getData()) {
+				System.out.println(object);
+				data.add((Map<String, String>) object);
+			}
+			adminDataUpdateService.updateAdminData(payload.getTable_name(), data, payload.getAction());
 			response.setStatus(APIStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setStatus(APIStatus.BAD);
+		} finally {
+			return writeObjectToJson(response);
 		}
-    	return writeObjectToJson(response);
-    }
-    
-    @RequestMapping(value = ReqMapConstants.GET_INSIGHT_DATA, 
-    		method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
-    public String getInsightData(@RequestBody InsightData payload) {
-    	//TODO add try catch
-    	System.out.println(payload);
-    	StatusResponse response = new StatusResponse();
-    	try {
-//    		for (Object object: payload.getData()) {
-//    			System.out.println(object);
-//    			data.add((Map<String, String>) object);
-//    		}
-//    		adminDataUpdateService.updateAdminData(payload.getTable_name(), data, payload.getAction());
-    		InsightData insightData = new InsightData();
-//    		ChartData chartData = new ChartData();
-//    		DataSets dataSets = new DataSets();
-//    		chartData.setDatasets(new ArrayList<DataSets>());
-    		response.setResult(insightsDataService.getInsightsData(payload.getFrom_date(), payload.getTo_date(), payload.getInsight_level()));
-			response.setStatus(APIStatus.OK);
+	}
+
+	@SuppressWarnings("finally")
+	@RequestMapping(value = ReqMapConstants.GET_INSIGHT_DATA, method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
+	public String getInsightData(@RequestBody InsightData payload) {
+		StatusResponse<InsightData> response = new StatusResponse<InsightData>();
+		try {
+			EmployeeRepo employee = employeeRepository.findByLoginId (payload.getEmployee_id());
+			if (employee != null && employee.getRoleLookup() != null &&
+					(employee.getRoleLookup().getDescription().equals("Admin") ||
+							employee.getRoleLookup().getDescription().equals("POC"))) {
+				InsightData insightData = new InsightData();
+				response.setResult(insightsDataService.getInsightsData(payload.getFrom_date(), payload.getTo_date(),
+						payload.getInsight_level(), payload.getEmployee_id(), employee.getRoleLookup().getDescription()));
+				response.setStatus(APIStatus.OK);
+			} else {
+				throw new Exception();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setStatus(APIStatus.BAD);
-		}
-    	return writeObjectToJson(response);
-    }
+		} finally {
+			return writeObjectToJson(response);
+		}	
+	}
 
-    @RequestMapping(value = ReqMapConstants.GET_EVENT_SUMMARY_DATA, 
-    		method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
-    public String getEventIdList() {
-    	//TODO add try catch
-    	StatusResponse response = new StatusResponse();
-    	response.setResult(adminService.getEventLookUpData());
-    	response.setStatus(APIStatus.OK);
-    	return writeObjectToJson(response);
-    }
-	
-    @RequestMapping(value = ReqMapConstants.TRIGGER_EMAIL_BATCH, 
-    		method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
-    public String triggerEmailBatch(@PathVariable("eventId") String eventId, @PathVariable("isReminder") String isReminder) {
-    	//TODO add try catch
-    	StatusResponse response = new StatusResponse();
-    	emailBatchService.triggerEmailBatch(eventId, isReminder);
-    	response.setResult("Email Batch Triggered Successfully");
-    	response.setStatus(APIStatus.OK);
-    	return writeObjectToJson(response);
-    }
+	@SuppressWarnings({"finally" })
+	@RequestMapping(value = ReqMapConstants.GET_EVENT_SUMMARY_DATA, method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
+	public String getEventIdList() {	
+		StatusResponse<List<?>> response = new StatusResponse<List<?>>();
+		try {
+			response.setResult(adminService.getEventLookUpData());
+			response.setStatus(APIStatus.OK);
+		} catch (Exception e) {
+			response.setStatus(APIStatus.BAD);
+
+		} finally {
+			return writeObjectToJson(response);
+		}
+	}
+
+	@SuppressWarnings("finally")
+	@RequestMapping(value = ReqMapConstants.TRIGGER_EMAIL_BATCH, method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
+	public String triggerEmailBatch(@PathVariable("eventId") String eventId,
+			@PathVariable("isReminder") String isReminder) {
+		StatusResponse<String> response = new StatusResponse<String>();
+		try {
+			emailBatchService.triggerEmailBatch(eventId, isReminder);
+			response.setResult("Email Batch Triggered Successfully");
+			response.setStatus(APIStatus.OK);
+		} catch (Exception e) {
+			response.setStatus(APIStatus.BAD);
+		} finally {
+			return writeObjectToJson(response);
+		}
+	}
 }

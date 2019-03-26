@@ -32,14 +32,14 @@ public class InsightsDataService {
 	@Autowired
 	private FeedbackOptionRepository feedbackOptionRepository;
 
-	public InsightData getInsightsData(Date fromDate, Date toDate, String insight_level) {
+	public InsightData getInsightsData(Date fromDate, Date toDate, String insight_level, int employee_id, String role) {
 		InsightData insightData = new InsightData();
 		switch (insight_level) {
 		case "Events":
-			insightData = getEventLevelInsightData(fromDate, toDate, insight_level);
+			insightData = getEventLevelInsightData(fromDate, toDate, insight_level, employee_id, role);
 			break;
 		case "Project":
-			insightData = getProjectLevelInsightData(fromDate, toDate, insight_level);
+			insightData = getProjectLevelInsightData(fromDate, toDate, insight_level, employee_id, role);
 			break;
 		default:
 			System.out.println("Inside Default case of INsights Data switch");
@@ -84,7 +84,7 @@ public class InsightsDataService {
 		return optionData;
 	}
 	
-	private InsightData getEventLevelInsightData(Date fromDate, Date toDate, String insight_level) {
+	private InsightData getEventLevelInsightData(Date fromDate, Date toDate, String insight_level, int employee_id, String role) {
 		List<String> eventIDList = new ArrayList();
 		HashMap<String, Integer> tmpData = new HashMap();
 		String status = null;
@@ -100,7 +100,11 @@ public class InsightsDataService {
 		ArrayList<DataSets> dataSetList = new ArrayList();
 		ArrayList<ChartData> chartDataList = new ArrayList();
 		
-		eventIDList = eventRepository.findEventIdListBetweenDates(fromDate, toDate);
+		if (role.equals("Admin")) {
+			eventIDList = eventRepository.findEventIdListBetweenDates(fromDate, toDate);
+		} else {
+			eventIDList = eventRepository.findEventIdListBetweenDatesForPOC(fromDate, toDate, "%" + employee_id + "%");
+		}
 		chartData = new ChartData();
 		chartData.setChart_type("Data Based on Rating");
 		chartData.setLabels(ratingRepository.findAllDescription());
@@ -160,7 +164,7 @@ public class InsightsDataService {
 		return insightData;
 	}
 	
-	private InsightData getProjectLevelInsightData(Date fromDate, Date toDate, String insight_level) {
+	private InsightData getProjectLevelInsightData(Date fromDate, Date toDate, String insight_level, int employee_id, String role) {
 		List<EventRepo> eventList = new ArrayList();
 		HashMap<String, String> projectMap = new HashMap();
 		HashMap<String, Integer> tmpData = new HashMap();
@@ -179,7 +183,11 @@ public class InsightsDataService {
 		String projectName = null;
 		String tmp;
 		
-		eventList = eventRepository.findEventListBetweenDates(fromDate, toDate);
+		if (role.equals("Admin")) {
+			eventList = eventRepository.findEventListBetweenDates(fromDate, toDate);
+		} else {
+			eventList = eventRepository.findEventListBetweenDatesForPOC(fromDate, toDate, "%" + employee_id + "%");
+		}
 		for (EventRepo repo : eventList) {
 			projectName = repo.getProject().getDescription();
 			if (!projectMap.containsKey(projectName)) {

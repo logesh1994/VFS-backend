@@ -19,9 +19,20 @@ public class InsightData implements Serializable {
 	@JsonProperty("To Date")
     private Date to_date;
 	
+	@JsonProperty("Employee Id")
+	private int employee_id;
+	
 	@JsonProperty("chartData")	
 	private List<ChartData> chart_data;
 	
+	public int getEmployee_id() {
+		return employee_id;
+	}
+
+	public void setEmployee_id(int employee_id) {
+		this.employee_id = employee_id;
+	}
+
 	public List<ChartData> getChart_data() {
 		return chart_data;
 	}

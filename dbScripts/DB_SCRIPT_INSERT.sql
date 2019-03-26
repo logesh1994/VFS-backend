@@ -99,10 +99,10 @@ INSERT INTO `outreach_vfs`.`event`
 `created_by_id`)
 VALUES
 (123456, 'JAN',1,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
-1,1,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512642',
+1,1,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512645',
 10,20,10,30,100,4,1,519847),
 ('EVNT00046103', 'FEB',2,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
-2,2,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512642',
+2,2,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512646,512647',
 10,20,10,30,100,4,1,519847);
 
 INSERT INTO `outreach_vfs`.`event_details`
