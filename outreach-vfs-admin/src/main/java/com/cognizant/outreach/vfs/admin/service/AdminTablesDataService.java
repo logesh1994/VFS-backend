@@ -244,8 +244,8 @@ public class AdminTablesDataService {
     		event.setUnregistered_count(detailRepository.getCountBasedOnParticipationStatus(event.getEventId(), "Unregistered"));
     		event.setFailed_to_attend_count(detailRepository.getCountBasedOnParticipationStatus(event.getEventId(), "Failed To Attend"));
     		event.setSubmitted_rating(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Submitted"));
-    		event.setSubmitted_reason_rfa(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Submitted"));
-    		event.setSubmitted_reason_ur(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Submitted"));
+    		event.setYet_to_send_mail_count(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Yet To Send Mail"));
+    		event.setMail_sent_count(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Mail Sent"));
     		eventData.add(event);
     	}
     	return eventData;

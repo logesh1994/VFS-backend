@@ -129,10 +129,10 @@ public class AdminAPI extends APIUtil {
 	
     @RequestMapping(value = ReqMapConstants.TRIGGER_EMAIL_BATCH, 
     		method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
-    public String triggerEmailBatch(@PathVariable("eventId") String eventId) {
+    public String triggerEmailBatch(@PathVariable("eventId") String eventId, @PathVariable("isReminder") String isReminder) {
     	//TODO add try catch
     	StatusResponse response = new StatusResponse();
-    	emailBatchService.triggerEmailBatch(eventId);
+    	emailBatchService.triggerEmailBatch(eventId, isReminder);
     	response.setResult("Email Batch Triggered Successfully");
     	response.setStatus(APIStatus.OK);
     	return writeObjectToJson(response);

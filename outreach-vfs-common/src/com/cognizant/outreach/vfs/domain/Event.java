@@ -86,11 +86,27 @@ public class Event implements Serializable {
 	@JsonProperty("Submitted Rating Count")
 	private int submitted_rating;
 	
-	@JsonProperty("Submitted Reason Count(RFA)")
-	private int submitted_reason_rfa;
+	@JsonProperty("Yet to Send Mail Count")
+	private int yet_to_send_mail_count;
 	
-	@JsonProperty("Submitted Reason Count(UR)")
-	private int submitted_reason_ur;
+	@JsonProperty("Mail Sent Count")
+	private int mail_sent_count;
+
+	public int getYet_to_send_mail_count() {
+		return yet_to_send_mail_count;
+	}
+
+	public void setYet_to_send_mail_count(int yet_to_send_mail_count) {
+		this.yet_to_send_mail_count = yet_to_send_mail_count;
+	}
+
+	public int getMail_sent_count() {
+		return mail_sent_count;
+	}
+
+	public void setMail_sent_count(int mail_sent_count) {
+		this.mail_sent_count = mail_sent_count;
+	}
 
 	public int getParticipated_count() {
 		return participated_count;
@@ -124,21 +140,7 @@ public class Event implements Serializable {
 		this.submitted_rating = submitted_rating;
 	}
 
-	public int getSubmitted_reason_rfa() {
-		return submitted_reason_rfa;
-	}
-
-	public void setSubmitted_reason_rfa(int submitted_reason_rfa) {
-		this.submitted_reason_rfa = submitted_reason_rfa;
-	}
-
-	public int getSubmitted_reason_ur() {
-		return submitted_reason_ur;
-	}
-
-	public void setSubmitted_reason_ur(int submitted_reason_ur) {
-		this.submitted_reason_ur = submitted_reason_ur;
-	}
+	
 
 	public String getEventId() {
 		return eventId;

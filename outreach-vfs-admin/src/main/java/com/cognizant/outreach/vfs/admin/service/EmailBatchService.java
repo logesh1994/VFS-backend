@@ -32,14 +32,15 @@ public class EmailBatchService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
-	public void triggerEmailBatch(String eventId) {
-		List<EventDetailRepo> repoList = detailRepository.findBasedOnFeedbackStatus(eventId, "Yet To Send Mail");
+	public void triggerEmailBatch(String eventId, String isReminder) {
+		List<EventDetailRepo> repoList = Boolean.parseBoolean(isReminder) ? detailRepository.findBasedOnFeedbackStatus(eventId, "Mail Sent") :
+			detailRepository.findBasedOnFeedbackStatus(eventId, "Yet To Send Mail");
 		EventRepo event = repoList.get(0).getEvent();
 		String email_content_attended = "Thank you for your participation in the Outreach Event \""+ event.getEvntName() +"\" on \""+ event.getEvntDate() +"\"";
 		String email_content_UR = "You have unregistered for the Outreach Event \""+ event.getEvntName() +"\" that occured on \""+ event.getEvntDate() +"\"";
 		String email_content_RFA = "You have missed the Outreach Event \""+ event.getEvntName() +"\" that occured on \""+ event.getEvntDate() +"\"";
 		new Thread(() -> {
-			StatusRepo statusRepo = statusRepository.findByStatusDescription("Email Sent");
+			StatusRepo statusRepo = statusRepository.findByStatusDescription("Mail Sent");
 			for (EventDetailRepo repo: repoList) {
 				String feedbackLink = "http://localhost:4200/feedback/"+repo.getEmployee().getEmployeeId()+"/"+repo.getId();
 				switch(repo.getStatus1().getDescription()) {
@@ -63,8 +64,13 @@ public class EmailBatchService {
 			for (EmployeeRepo repo: employeeRepository.findListbyRole(Arrays.asList("Admin", "POC"))) {
 				email_dl = email_dl + "," + repo.getEmpEmail();
 			}
-			emailService.sendEmaiAlert(email_dl, "Feedback Emails for the Outreach Event \""+ event.getEvntName() +
-					"\" (Event Date - "+ event.getEvntDate() + ", Id - "+ event.getId() +")" + " has been sent Successfully", null);
+			if (Boolean.parseBoolean(isReminder)) {
+				emailService.sendEmaiAlert(email_dl, "Reminder Feedback Emails for the Outreach Event \""+ event.getEvntName() +
+						"\" (Event Date - "+ event.getEvntDate() + ", Id - "+ event.getId() +")" + " has been sent Successfully", null);
+			} else {
+				emailService.sendEmaiAlert(email_dl, "Feedback Emails for the Outreach Event \""+ event.getEvntName() +
+						"\" (Event Date - "+ event.getEvntDate() + ", Id - "+ event.getId() +")" + " has been sent Successfully", null);
+			}
 		}).start();
 		
 	}

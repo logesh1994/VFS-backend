@@ -43,12 +43,12 @@ public class FeedbackService {
 				feedbackTemplate.setEvent_id(String.valueOf(event_Detail_id));
 				if (eventDetailRepo.getStatus1().getDescription().equals("Attended")) {
 					feedbackTemplate.setFeedback_type("RPA");
-					feedbackTemplate.setDisplay_message("Please share your Feedback for the Outreach event "
-							+ eventDetailRepo.getEvent().getEvntName() +" that you attended on " + eventDetailRepo.getEvent().getEvntDate());
+					feedbackTemplate.setDisplay_message("Please share your Feedback for the Outreach event \""
+							+ eventDetailRepo.getEvent().getEvntName() +"\" that you attended on " + eventDetailRepo.getEvent().getEvntDate());
 				} else {
 					//TODO Check the message to be displayed
-					feedbackTemplate.setDisplay_message("Please share your Feedback for the Outreach event "
-							+ eventDetailRepo.getEvent().getEvntName() +" that you missed to attend on " + eventDetailRepo.getEvent().getEvntDate());
+					feedbackTemplate.setDisplay_message("Please share your Feedback for the Outreach event \""
+							+ eventDetailRepo.getEvent().getEvntName() +"\" that you missed to attend on " + eventDetailRepo.getEvent().getEvntDate());
 					feedbackTemplate.setFeedback_type("RFA");
 					for (FeedbackOptionRepo repo : feedbackOptionRepository.findAll()) {
 						feedbackOptions.add(repo.getDescription());

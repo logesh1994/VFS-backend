@@ -20,37 +20,45 @@ import com.cognizant.outreach.vfs.util.ReqMapConstants;
 @RestController
 @RequestMapping(ReqMapConstants.FEEDBACK)
 @CrossOrigin(origins = "http://localhost:4200")
-public class FeedbackAPI extends APIUtil{
+public class FeedbackAPI extends APIUtil {
 
-private static final Logger logger = LogManager.getLogger(FeedbackAPI.class.getName());
-	
+	private static final Logger logger = LogManager.getLogger(FeedbackAPI.class.getName());
+
 	@Autowired
 	protected FeedbackService feedbackService;
-	
-	@RequestMapping(value = ReqMapConstants.RETRIEVE_FEEDBACK_TEMPLATE, method = RequestMethod.POST
-			, produces = ReqMapConstants.CHARSET)
-    public String retrieveFeedbackTemplate(@RequestBody FeedbackTemplate request) {
-		int event_detail_id = Integer.parseInt(request.getEvent_id());
-		int employee_id = Integer.parseInt(request.getEmployee_id());
+
+	@RequestMapping(value = ReqMapConstants.RETRIEVE_FEEDBACK_TEMPLATE, method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
+	public String retrieveFeedbackTemplate(@RequestBody FeedbackTemplate request) {
 		StatusResponse response = new StatusResponse();
-		response.setResult(feedbackService.getFeedbackTemplateData(event_detail_id, employee_id));
-		response.setStatus(APIStatus.OK);
-		System.out.println(feedbackService.getFeedbackTemplateData(event_detail_id, employee_id));
-		return writeObjectToJson(response);
-		//TODO INT Parse exception Handling
-//		statusResponse = new StatusResponse<Object>(APIStatus.UNAUTH);
-	}
-	
-	@RequestMapping(value = ReqMapConstants.SAVE_FEEDBACK, method = RequestMethod.POST
-			, produces = ReqMapConstants.CHARSET)
-    public String saveFeedback(@RequestBody Feedback request) {
-		StatusResponse response = new StatusResponse();
-		response.setResult(feedbackService.saveFeedbackData(request));
-		response.setStatus(APIStatus.OK);
-		return writeObjectToJson(response);
-		//TODO INT Parse exception Handling
-//		statusResponse = new StatusResponse<Object>(APIStatus.UNAUTH);
+		try {
+			int event_detail_id = Integer.parseInt(request.getEvent_id());
+			int employee_id = Integer.parseInt(request.getEmployee_id());
+
+			FeedbackTemplate feedbackTemplate = feedbackService.getFeedbackTemplateData(event_detail_id, employee_id);
+			if (feedbackTemplate == null) {
+				throw new Exception();
+			} else {
+				response.setResult(feedbackTemplate);
+				response.setStatus(APIStatus.OK);
+			}
+		} catch (Exception e) {
+			response.setStatus(APIStatus.BAD);
+		} finally {
+			return writeObjectToJson(response);
+		}
 	}
 
-	
+	@RequestMapping(value = ReqMapConstants.SAVE_FEEDBACK, method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
+	public String saveFeedback(@RequestBody Feedback request) {
+		StatusResponse response = new StatusResponse();
+		try {
+			response.setResult(feedbackService.saveFeedbackData(request));
+			response.setStatus(APIStatus.OK);
+		} catch (Exception e) {
+			response.setStatus(APIStatus.BAD);
+		} finally {
+			return writeObjectToJson(response);
+		}	
+	}
+
 }
