@@ -32,7 +32,6 @@ import com.cognizant.outreach.vfs.util.ReqMapConstants;
 
 @RestController
 @RequestMapping(ReqMapConstants.ADMIN)
-@CrossOrigin(origins = "http://localhost:4200")
 public class AdminAPI extends APIUtil {
 
 	private static final Logger logger = LogManager.getLogger(AdminAPI.class.getName());
