@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>com.cognizant.outreach.vfs.eureka</groupId>
 	<artifactId>EurekaServer</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>EurekaServer</name>
 	<description>Eureka for VFS - Outreach</description>
@@ -49,6 +50,23 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+				<dockerHost>http://172.18.2.50:2735</dockerHost>
+					<imageName>VFS-Eureka-512641</imageName>
+					<baseImage>java:8</baseImage>
+					<entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

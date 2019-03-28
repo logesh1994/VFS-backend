@@ -12,9 +12,6 @@ import com.cognizant.outreach.vfs.domain.Employee;
 
 @Service
 public class EmployeeService {
-	
-	@Autowired
-	protected AppConfig appConfig;
 
     @Autowired
     private EmployeeRepository employeeRepository;
