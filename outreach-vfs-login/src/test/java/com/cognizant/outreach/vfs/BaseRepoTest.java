@@ -118,7 +118,7 @@ public class BaseRepoTest {
 	
 	public EventRepo createEventRepo() {
 		EventCouncilRepo council = createEventCouncilRepo();
-		EventRepo repo = new EventRepo("EVENT001",500000, "512642,512642", new Date(), "Test Description", "Test Event Name", 100, "JAN", 200, 50, 150, 10, "Test Venu",
+		EventRepo repo = new EventRepo("EVENT001",500000, "512642,512643", new Date(), "Test Description", "Test Event Name", 100, "JAN", 200, 50, 150, 10, "Test Venu",
 				council , createIiepCategoryRepo("Test IIEP"), council.getLocation(), createBenificiaryRepo("Test Beneficiary"), createProjectRepo("Test Project"), createCategoryRepo("Test Categpry"));
 		entityManager.persistAndFlush(repo);
 		return repo;
@@ -127,8 +127,8 @@ public class BaseRepoTest {
 	public EventDetailRepo createEventDetailRepo(String status1, String status2) {
 		EventRepo event = createEventRepo();
 		EmployeeRepo employee = createEmployeeRepo(500001);
-		StatusRepo status_1 = new StatusRepo("Registered");
-		StatusRepo status_2 = new StatusRepo("Yet To Send Mail");
+		StatusRepo status_1 = createStatusRepo("Registered");
+		StatusRepo status_2 = createStatusRepo("Yet To Send Mail");
 		if (status1 != null) status_1 = new StatusRepo(status1);
 		if (status2 != null) status_2 = new StatusRepo(status2);
 		EventDetailRepo repo = new EventDetailRepo(500000, 10, 10, employee, event, status_1, status_2);
