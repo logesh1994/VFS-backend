@@ -42,7 +42,7 @@ public class EmailBatchService {
 		new Thread(() -> {
 			StatusRepo statusRepo = statusRepository.findByStatusDescription("Mail Sent");
 			for (EventDetailRepo repo: repoList) {
-				String feedbackLink = "http://localhost:4200/feedback/"+repo.getEmployee().getEmployeeId()+"/"+repo.getId();
+				String feedbackLink = "http://172.18.2.50:10205/feedback/"+repo.getEmployee().getEmployeeId()+"/"+repo.getId();
 				switch(repo.getStatus1().getDescription()) {
 				case "Attended":
 					emailService.sendFeedbackMail(repo.getEmployee().getEmpEmail(), repo.getEmployee().getEmployeeFullname(), email_content_attended, feedbackLink);

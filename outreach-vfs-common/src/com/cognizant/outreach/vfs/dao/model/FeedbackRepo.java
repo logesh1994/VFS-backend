@@ -22,9 +22,6 @@ public class FeedbackRepo implements Serializable {
 	@Column(name="admin_feedback")
 	private String adminFeedback;
 
-	@Column(name="create_timestamp")
-	private Timestamp createTimestamp;
-
 	@Column(name="improve_feedback")
 	private String improveFeedback;
 
@@ -81,13 +78,6 @@ public class FeedbackRepo implements Serializable {
 		this.adminFeedback = adminFeedback;
 	}
 
-	public Timestamp getCreateTimestamp() {
-		return this.createTimestamp;
-	}
-
-	public void setCreateTimestamp(Timestamp createTimestamp) {
-		this.createTimestamp = createTimestamp;
-	}
 
 	public String getImproveFeedback() {
 		return this.improveFeedback;

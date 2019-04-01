@@ -15,10 +15,14 @@ public final class FeedbackBeanUtils {
 			feedback = new Feedback();
 			feedback.setFeedback_id(feedbackRepo.getId());
 			feedback.setEvent_detail_id(feedbackRepo.getEventDetail().getId());
-			feedback.setRating(feedbackRepo.getRatingBean().getDescription());
-			feedback.setFeedback_option(feedbackRepo.getFeedbackOption().getDescription());
+			if (feedbackRepo.getRatingBean() != null ) {
+				feedback.setRating(feedbackRepo.getRatingBean().getDescription());
+			}
+			if (feedbackRepo.getFeedbackOption() != null) {
+				feedback.setFeedback_option(feedbackRepo.getFeedbackOption().getDescription());
+			}
 			feedback.setLike_feedback(feedbackRepo.getLikeFeedback());
-			feedback.setImprove_feedback(feedback.getImprove_feedback());
+			feedback.setImprove_feedback(feedbackRepo.getImproveFeedback());
 			feedback.setAdmin_feedback(feedbackRepo.getAdminFeedback());
 			feedback.setUpdate_id(feedbackRepo.getEmployee().getEmployeeId());
 			feedbackList.add(feedback);

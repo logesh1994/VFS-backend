@@ -11,15 +11,15 @@ import com.cognizant.outreach.vfs.BaseRepoTest;
 
 public class EmployeeApiTest extends BaseRepoTest{
 
-	@Autowired
-	private WebApplicationContext context;
-	
-	private MockMvc mockMvc;
-	
-	@Before
-	public void setUp() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-	}
+//	@Autowired
+//	private WebApplicationContext context;
+//	
+//	private MockMvc mockMvc;
+//	
+//	@Before
+//	public void setUp() {
+//		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+//	}
 	
 	@Test
 	public void testAuthenticate() {

@@ -98,10 +98,10 @@ INSERT INTO `outreach_vfs`.`event`
 `event_council_id`,
 `created_by_id`)
 VALUES
-(123456, 'JAN',1,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
+('EVENT0001', 'JAN',1,2,'Donations','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
 1,1,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512645',
 10,20,10,30,100,4,1,519847),
-('EVNT00046103', 'FEB',2,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
+('EVENT0002', 'FEB',2,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
 2,2,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512646,512647',
 10,20,10,30,100,4,1,519847);
 
@@ -109,23 +109,23 @@ INSERT INTO `outreach_vfs`.`event_details`
 (`evnt_id`,`employee_id`,`volunteer_hrs`,`travel_hrs`,`participation_status_id`,
 `feedback_status_id`,`created_by_id`)
 VALUES
-(123456,512641,2,1,2,7,512641),
-(123456,512641,2,1,4,7,512641),
-(123456,512641,2,1,6,11,512641),
-(123456,512641,2,1,2,10,512641),
-(123456,512641,2,1,4,10,512641),
-(123456,512641,2,1,6,10,512641);
+('EVENT0001',512641,2,1,2,7,512641),
+('EVENT0001',512641,2,1,4,7,512641),
+('EVENT0001',512641,2,1,6,11,512641),
+('EVENT0001',512641,2,1,2,10,512641),
+('EVENT0001',512641,2,1,4,10,512641),
+('EVENT0001',512641,2,1,6,10,512641);
 
 INSERT INTO `outreach_vfs`.`event_details`
 (`evnt_id`,`employee_id`,`volunteer_hrs`,`travel_hrs`,`participation_status_id`,
 `feedback_status_id`,`created_by_id`)
 VALUES
-('EVNT00046103',512641,2,1,2,7,512641),
-('EVNT00046103',512641,2,1,4,7,512641),
-('EVNT00046103',512641,2,1,6,11,512641),
-('EVNT00046103',512641,2,1,2,10,512641),
-('EVNT00046103',512641,2,1,4,10,512641),
-('EVNT00046103',512641,2,1,6,10,512641);
+('EVENT0002',512641,2,1,2,7,512641),
+('EVENT0002',512641,2,1,4,7,512641),
+('EVENT0002',512641,2,1,6,11,512641),
+('EVENT0002',512641,2,1,2,10,512641),
+('EVENT0002',512641,2,1,4,10,512641),
+('EVENT0002',512641,2,1,6,10,512641);
 
 
 INSERT INTO `outreach_vfs`.`feedback`

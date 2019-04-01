@@ -264,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `outreach_vfs`.`feedback` (
   `improve_feedback` VARCHAR(255),
   `admin_feedback` VARCHAR(255),
   `update_id` INT(11) NOT NULL,
-  `create_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   CONSTRAINT `Feedback_fk0`
     FOREIGN KEY (`event_detail_id`)

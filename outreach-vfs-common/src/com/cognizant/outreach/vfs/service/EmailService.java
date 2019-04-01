@@ -1,12 +1,19 @@
 package com.cognizant.outreach.vfs.service;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.annotation.PostConstruct;
+import javax.imageio.ImageIO;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -17,7 +24,10 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.outreach.vfs.config.AppConfig;
@@ -78,31 +88,40 @@ public class EmailService {
 			return false;
 		}
 	}
-	
+
 	public BodyPart getMessageBodyPart(String sourceName, String contentId) throws Exception {
-	    DataSource datasource = new FileDataSource(Thread.currentThread().getContextClassLoader().getResource(sourceName).getFile());
-//		ClassLoader classLoader = getClass().getClassLoader();
-//		DataSource datasource = new FileDataSource(classLoader.getResource(sourceName).getFile());
+
+		ClassPathResource resource = new ClassPathResource("/"+sourceName);
+		InputStream initialStream = resource.getInputStream();
+		File tempFile = File.createTempFile("temp", ".png");
+		
+		try {
+			FileUtils.copyInputStreamToFile(initialStream, tempFile);
+		} finally {
+			IOUtils.closeQuietly(initialStream);
+		}
+		
+		DataSource datasource = new FileDataSource(tempFile);
 		BodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setDataHandler(new DataHandler(datasource));
 		messageBodyPart.setHeader("Content-ID", "<" + contentId + ">");
 		messageBodyPart.setDisposition(MimeBodyPart.INLINE);
 		return messageBodyPart;
 	}
-	
+
 	public boolean sendEmaiAlert(String distributionList, String emaiContent, File attachment) {
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(appConfig.getValueOfKey("mail.smtp.from")));
-			
+
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(distributionList));
 			message.setSubject("Outreach Admin Communications");
 
 			MimeMultipart multipart = new MimeMultipart("related");
 			BodyPart messageBodyPart = new MimeBodyPart();
-			
-			String htmlText = EmailTemplate.EMAIL_ALERT.replace("#UserName", "Team")
-					.replace("#emailContent", emaiContent);
+
+			String htmlText = EmailTemplate.EMAIL_ALERT.replace("#UserName", "Team").replace("#emailContent",
+					emaiContent);
 
 			messageBodyPart.setContent(htmlText, "text/html");
 			if (attachment != null) {
@@ -115,7 +134,7 @@ public class EmailService {
 			multipart.addBodyPart(getMessageBodyPart("divider.png", "divider"));
 			multipart.addBodyPart(getMessageBodyPart("rounder-dwn.png", "rounder-dwn"));
 			multipart.addBodyPart(getMessageBodyPart("rounder-up.png", "rounder-up"));
-			
+
 			message.setContent(multipart);
 			Transport.send(message);
 
@@ -125,7 +144,7 @@ public class EmailService {
 			e.printStackTrace();
 			return false;
 		}
-	
+
 	}
 
 }

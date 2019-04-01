@@ -144,4 +144,14 @@ public class FileUtil {
 		workbook.close();
 		return finalList;
 	}
+	
+	public static void createDirectories(List<String> paths) {
+		File directory = null;
+		for (String path: paths) {
+			directory = new File(path);
+			if (!directory.exists()) {
+				directory.mkdirs();
+			}
+		}
+	}
 }
