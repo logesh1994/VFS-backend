@@ -16,8 +16,14 @@ import com.cognizant.outreach.vfs.login.service.EmployeeService;
 import com.cognizant.outreach.vfs.util.APIUtil;
 import com.cognizant.outreach.vfs.util.ReqMapConstants;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(ReqMapConstants.LOGIN)
+@Api(value="VFS Login MicroService")
 public class EmployeeAPI extends APIUtil {
 
 	private static final Logger logger = LogManager.getLogger(EmployeeAPI.class.getName());
@@ -25,6 +31,12 @@ public class EmployeeAPI extends APIUtil {
 	@Autowired
 	protected EmployeeService employeeService;
 
+	@ApiOperation(value = "Login Authentiaction")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+			@ApiResponse(code = 201, message = "Invalid request parameter"),
+			@ApiResponse(code = 110, message = "Employee does not exist"),
+			@ApiResponse(code = 111, message = "Employee name or password is not correct")})
 	@RequestMapping(value = ReqMapConstants.LOGIN_AUTHENTICATE, method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
 	public String authenticate(@RequestBody Employee employee) {
 		StatusResponse response = new StatusResponse();

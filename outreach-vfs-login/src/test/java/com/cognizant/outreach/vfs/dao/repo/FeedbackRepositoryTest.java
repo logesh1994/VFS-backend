@@ -48,4 +48,10 @@ public class FeedbackRepositoryTest extends BaseRepoTest {
 		List<FeedbackRepo> repoList = feedbackRepository.findAllByEventPOC("%512642%");
 		Assert.assertEquals(feedback.getImproveFeedback(), repoList.get(0).getImproveFeedback());
 	}
+	
+	@Test
+	public void testGetFeedbackSubmittedCount() {
+		int count = feedbackRepository.getFeedbackSubmittedCount(feedback.getEventDetail().getEvent().getId());
+		Assert.assertEquals(1, count);
+	}
 }

@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -25,7 +27,7 @@ public class OutreachVfsLoginApplication {
 	}
 	
 	@Bean
-    public Docket newsApi() {
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("apis")
                 .apiInfo(apiInfo())
@@ -34,12 +36,12 @@ public class OutreachVfsLoginApplication {
                 .build();
     }
 	
-	private ApiInfo apiInfo() {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("VFS REST API Documents")
+                .title("VFS Login REST API Documentation")
                 .description("Documents with Swagger 2")
-                .termsOfServiceUrl("http://cognizant.com")
-                .contact(new Contact("VFS", "http://cognizant.com", "260753@cognizant.com"))
+                .termsOfServiceUrl("http://172.18.2.50:10205/outreach/signin")
+                .contact(new Contact("VFS", "http://172.18.2.50:10205/outreach/signin", "512641@cognizant.com"))
                 .license("")
                 .licenseUrl("")
                 .version("1.0")

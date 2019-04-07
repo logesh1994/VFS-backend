@@ -174,12 +174,13 @@ public class EntityHelperService {
 		return categoryRepo;
 	}
 
-	public EmployeeRepo addEmployee(int employeeId, RoleLookupRepo role) {
+	public EmployeeRepo addEmployee(int employeeId, RoleLookupRepo role, float volunteerHours) {
 		EmployeeRepo employeeRepo = employeeRepository.findByLoginId(employeeId);
 		if (employeeRepo == null) {
 			employeeRepo = new EmployeeRepo(employeeId, employeeId + Constants.COGNIZANT_MAIL, role);
-			employeeRepository.save(employeeRepo);
 		}
+		employeeRepo.setEvntVolunteerHours(employeeRepo.getEvntVolunteerHours() + volunteerHours);
+		employeeRepository.save(employeeRepo);
 		return employeeRepo;
 	}
 
@@ -427,7 +428,7 @@ public class EntityHelperService {
 		if(eventPoc_s != null) {
 			RoleLookupRepo role = roleRepository.findByRoleDescription("POC");
 			for (String pocId: Arrays.asList(eventPoc_s.split(","))) {
-				addEmployee(Integer.parseInt(pocId), role);
+				addEmployee(Integer.parseInt(pocId), role, 0);
 			}
 		}
 		
@@ -475,7 +476,7 @@ public class EntityHelperService {
 	public EventDetailRepo addEventDetailRepo(int createdById, float travelHrs, float volunteerHrs, int employee_id,
 			String event_id, String participation_status, String feedback_status, Integer id, String action) {
 		EventDetailRepo eventDetailRepo = null;
-		EmployeeRepo employeeRepo = addEmployee(employee_id, null);
+		EmployeeRepo employeeRepo = addEmployee(employee_id, null, volunteerHrs);
 		// Assuming Event Summary has been saved
 		EventRepo eventRepo = eventRepository.findByEventId(event_id);
 		StatusRepo participation_stat = addStatusRepo(participation_status, 0, ADD_ACTION);
@@ -515,7 +516,7 @@ public class EntityHelperService {
 		FeedbackRepo repo = null;
 		FeedbackOptionRepo option = null;
 		RatingRepo ratingRepo = null;
-		EmployeeRepo employeeRepo = addEmployee(employee_id,  null);
+		EmployeeRepo employeeRepo = addEmployee(employee_id,  null, 0);
 		EventDetailRepo eventDetail = detailRepository.findByEventDetailId(eventDetail_id);
 		if (feedbackOption != null) {
 			option = addFeedbackOptionRepo(feedbackOption, null, ADD_ACTION);

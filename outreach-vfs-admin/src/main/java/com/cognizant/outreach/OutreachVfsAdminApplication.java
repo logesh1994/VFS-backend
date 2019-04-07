@@ -25,7 +25,7 @@ public class OutreachVfsAdminApplication {
 	}
 
 	@Bean
-    public Docket newsApi() {
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("apis")
                 .apiInfo(apiInfo())
@@ -33,13 +33,13 @@ public class OutreachVfsAdminApplication {
                 .paths(regex("/vfs/api.*"))
                 .build();
     }
-	
-	private ApiInfo apiInfo() {
+
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("VFS REST API Documents")
+                .title("VFS Admin REST API Documentation")
                 .description("Documents with Swagger 2")
-                .termsOfServiceUrl("http://cognizant.com")
-                .contact(new Contact("VFS", "http://cognizant.com", "512641@cognizant.com"))
+                .termsOfServiceUrl("http://172.18.2.50:10205/outreach/signin")
+                .contact(new Contact("VFS", "http://172.18.2.50:10205/outreach/signin", "512641@cognizant.com"))
                 .license("")
                 .licenseUrl("")
                 .version("1.0")

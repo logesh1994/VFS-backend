@@ -42,6 +42,7 @@ import com.cognizant.outreach.vfs.dao.repo.EventCouncilRepository;
 import com.cognizant.outreach.vfs.dao.repo.EventDetailRepository;
 import com.cognizant.outreach.vfs.dao.repo.EventRepository;
 import com.cognizant.outreach.vfs.dao.repo.FeedbackOptionRepository;
+import com.cognizant.outreach.vfs.dao.repo.FeedbackRepository;
 import com.cognizant.outreach.vfs.dao.repo.IiepCategoryRepository;
 import com.cognizant.outreach.vfs.dao.repo.LocationRepository;
 import com.cognizant.outreach.vfs.dao.repo.ProjectRepository;
@@ -109,6 +110,9 @@ public class AdminTablesDataService {
     
     @Autowired
     private EventDetailRepository detailRepository;
+    
+    @Autowired
+    private FeedbackRepository feedbackRepository;
     
     
     public List<AdminTableData> getAllAdminTableData() {
@@ -238,12 +242,11 @@ public class AdminTablesDataService {
     public List<Event> getEventLookUpData() {
     	List<Event> tmpEventData = getAllEventData();
     	List<Event> eventData = new ArrayList();
-    	//TODO EMAIL Yet to be trigger Indicator
     	for (Event event: tmpEventData) {
     		event.setParticipated_count(detailRepository.getCountBasedOnParticipationStatus(event.getEventId(), "Attended"));
     		event.setUnregistered_count(detailRepository.getCountBasedOnParticipationStatus(event.getEventId(), "Unregistered"));
     		event.setFailed_to_attend_count(detailRepository.getCountBasedOnParticipationStatus(event.getEventId(), "Failed To Attend"));
-    		event.setSubmitted_rating(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Submitted"));
+    		event.setSubmitted_rating(feedbackRepository.getFeedbackSubmittedCount(event.getEventId()));
     		event.setYet_to_send_mail_count(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Yet To Send Mail"));
     		event.setMail_sent_count(detailRepository.getCountBasedOnFeedbackStatus(event.getEventId(), "Mail Sent"));
     		eventData.add(event);

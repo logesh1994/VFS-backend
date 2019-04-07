@@ -22,6 +22,9 @@ public interface FeedbackRepository extends CrudRepository<FeedbackRepo, Integer
 	
 	@Query("SELECT e FROM FeedbackRepo e WHERE e.eventDetail.event.eventPoc_s like :pocId")
 	List<FeedbackRepo> findAllByEventPOC(@Param("pocId") String pocId);
+	
+	@Query("SELECT count(1) FROM FeedbackRepo e WHERE e.eventDetail.event.id =:eventId")
+	int getFeedbackSubmittedCount(@Param("eventId") String eventId);
 
 }
 

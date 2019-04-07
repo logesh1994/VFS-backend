@@ -30,8 +30,14 @@ import com.cognizant.outreach.vfs.service.AdminDataUpdateService;
 import com.cognizant.outreach.vfs.util.APIUtil;
 import com.cognizant.outreach.vfs.util.ReqMapConstants;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(ReqMapConstants.ADMIN)
+@Api(value="VFS Admin MicroService")
 public class AdminAPI extends APIUtil {
 
 	private static final Logger logger = LogManager.getLogger(AdminAPI.class.getName());
@@ -55,6 +61,9 @@ public class AdminAPI extends APIUtil {
 	private EmployeeRepository employeeRepository;
 
 	@SuppressWarnings("finally")
+	@ApiOperation(value = "Retrieve Admin Table data")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 400, message = "Bad Request")})
 	@RequestMapping(value = ReqMapConstants.GET_ADMIN_DATA, method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
 	public String getAdminData() {
 		StatusResponse<List<?>> response = new StatusResponse<List<?>>();
@@ -70,6 +79,9 @@ public class AdminAPI extends APIUtil {
 	}
 
 	@SuppressWarnings("finally")
+	@ApiOperation(value = "Retrieve Event Details and Feedback data based on Access")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 400, message = "Bad Request")})
 	@RequestMapping(value = ReqMapConstants.GET_EVENTDETAILS_DATA, method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
 	public String getEventDetailsAndFeedbackData(@PathVariable("employeeId") String employeeId) {
 		StatusResponse<List<?>> response = new StatusResponse<List<?>>();
@@ -91,6 +103,9 @@ public class AdminAPI extends APIUtil {
 	}
 
 	@SuppressWarnings({ "finally", "unchecked" })
+	@ApiOperation(value = "Update Admin Table Data Based on Specified Action ADD or EDIT including Bulk Addition")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 400, message = "Bad Request")})
 	@RequestMapping(value = ReqMapConstants.UPDATE_ADMIN_DATA, method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
 	public String updateAdminData(@RequestBody AdminUpdateData payload) {
 		StatusResponse<?> response = new StatusResponse();
@@ -111,6 +126,9 @@ public class AdminAPI extends APIUtil {
 	}
 
 	@SuppressWarnings("finally")
+	@ApiOperation(value = "Retrieve Insight Data based on access")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 400, message = "Bad Request")})
 	@RequestMapping(value = ReqMapConstants.GET_INSIGHT_DATA, method = RequestMethod.POST, produces = ReqMapConstants.CHARSET)
 	public String getInsightData(@RequestBody InsightData payload) {
 		StatusResponse<InsightData> response = new StatusResponse<InsightData>();
@@ -135,6 +153,9 @@ public class AdminAPI extends APIUtil {
 	}
 
 	@SuppressWarnings({"finally" })
+	@ApiOperation(value = "Retrieve Event Summary Data")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 400, message = "Bad Request")})
 	@RequestMapping(value = ReqMapConstants.GET_EVENT_SUMMARY_DATA, method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
 	public String getEventIdList() {	
 		StatusResponse<List<?>> response = new StatusResponse<List<?>>();
@@ -150,6 +171,9 @@ public class AdminAPI extends APIUtil {
 	}
 
 	@SuppressWarnings("finally")
+	@ApiOperation(value = "Trigger Feedback Email Batch or Reminder Batch")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success"),
+			@ApiResponse(code = 400, message = "Bad Request")})
 	@RequestMapping(value = ReqMapConstants.TRIGGER_EMAIL_BATCH, method = RequestMethod.GET, produces = ReqMapConstants.CHARSET)
 	public String triggerEmailBatch(@PathVariable("eventId") String eventId,
 			@PathVariable("isReminder") String isReminder) {
