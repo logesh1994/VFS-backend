@@ -73,7 +73,7 @@ public class FileWatcher {
 					Path filename = (Path) event.context();
 					for (String fileNamePattern : AdminTableUtils.ADMIN_TABLE_COLUMN_MAP.keySet()) {
 						filePatternMatch = filename.getFileName().toString()
-								.equals(fileNamePattern + Constants.EXCEL_EXTENSION);
+								.contains(Constants.EXCEL_EXTENSION);
 						if (filePatternMatch)
 							break;
 					}

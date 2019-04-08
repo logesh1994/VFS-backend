@@ -54,6 +54,7 @@ public class InsightsDataService {
 		int value;
 		if (!event_id_list.isEmpty()) {
 			for (FeedbackRepo feedbackRepo : feedbackRepository.findRatingDataForEventIdAndStatus(event_id_list, "Attended")) {
+				if (feedbackRepo.getRatingBean() != null) {
 				rating = feedbackRepo.getRatingBean().getDescription();
 				if (!ratingData.containsKey(rating)) {
 					value = 1;
@@ -61,6 +62,7 @@ public class InsightsDataService {
 					value = ratingData.get(rating) + 1;
 				}
 				ratingData.put(rating, value);
+				}
 			}
 		}
 		return ratingData;
@@ -72,6 +74,7 @@ public class InsightsDataService {
 		int value;
 		if (!event_id_list.isEmpty()) {
 			for (FeedbackRepo feedbackRepo : feedbackRepository.findRatingDataForEventIdAndStatus(event_id_list, status)) {
+				if (feedbackRepo.getFeedbackOption() != null) {
 				option = feedbackRepo.getFeedbackOption().getDescription();
 				if (!optionData.containsKey(option)) {
 					value = 1;
@@ -79,7 +82,7 @@ public class InsightsDataService {
 					value = optionData.get(option) + 1;
 				}
 				optionData.put(option, value);
-			}
+			}}
 		}
 		return optionData;
 	}

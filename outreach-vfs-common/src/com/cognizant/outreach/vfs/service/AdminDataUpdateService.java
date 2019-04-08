@@ -129,6 +129,20 @@ public class AdminDataUpdateService {
 				}
 			}
 			return true;
+		case "EventDetails":
+			EventDetails eventDetails = null;
+			for (Object object : data) {
+				eventDetails = new EventDetails();
+				eventDetails = (EventDetails) JsonUtils.parseObjectData(EventDetails.class, object);
+				if (eventDetails.getEvent_id() != null) {
+					entityHelperService.addEventDetailRepo(eventDetails.getCreated_by(), eventDetails.getTravel_hrs(),
+							eventDetails.getVolunteer_hrs(), eventDetails.getEmployee_id(), eventDetails.getEvent_id(),
+							eventDetails.getParticipation_status(), eventDetails.getFeedback_status(), eventDetails.getEvent_details_id(), action);
+				} else {
+					continue;
+				}
+			}
+			return true;
 		case "Project":
 			Project project = null;
 			for (Object object : data) {
@@ -186,14 +200,14 @@ public class AdminDataUpdateService {
 			}
 			return true;
 		case "Event Details":
-			EventDetails eventDetails = null;
+			EventDetails eventDetails1 = null;
 			for (Object object : data) {
-				eventDetails = new EventDetails();
-				eventDetails = (EventDetails) JsonUtils.parseObjectData(EventDetails.class, object);
-				if (eventDetails.getEvent_id() != null) {
-					entityHelperService.addEventDetailRepo(eventDetails.getCreated_by(), eventDetails.getTravel_hrs(),
-							eventDetails.getVolunteer_hrs(), eventDetails.getEmployee_id(), eventDetails.getEvent_id(),
-							eventDetails.getParticipation_status(), eventDetails.getFeedback_status(), eventDetails.getEvent_details_id(), action);
+				eventDetails1 = new EventDetails();
+				eventDetails1 = (EventDetails) JsonUtils.parseObjectData(EventDetails.class, object);
+				if (eventDetails1.getEvent_id() != null) {
+					entityHelperService.addEventDetailRepo(eventDetails1.getCreated_by(), eventDetails1.getTravel_hrs(),
+							eventDetails1.getVolunteer_hrs(), eventDetails1.getEmployee_id(), eventDetails1.getEvent_id(),
+							eventDetails1.getParticipation_status(), eventDetails1.getFeedback_status(), eventDetails1.getEvent_details_id(), action);
 				} else {
 					continue;
 				}

@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `outreach_vfs`.`employee` (
   `role_id` INT(11),
   `password` VARCHAR(255) DEFAULT NULL,
   `employee_status_id` INT(11),
-  `create_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `create_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `last_login` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`employee_id`),
   CONSTRAINT `Employee_fk0`
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `outreach_vfs`.`event` (
   `iiep_category_id` INT(11) NOT NULL,
   `event_council_id` INT(11) NOT NULL,
   `created_by_id` INT(11) NOT NULL,
-  `created_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   CONSTRAINT `Event_fk0`
     FOREIGN KEY (`evnt_base_location_id`)
@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `outreach_vfs`.`event_details` (
   `participation_status_id` INT(11) NOT NULL,
   `feedback_status_id` INT(11) NOT NULL,
   `created_by_id` INT(11) NOT NULL,
-  `created_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   CONSTRAINT `Event_Details_fk0`
     FOREIGN KEY (`evnt_id`)

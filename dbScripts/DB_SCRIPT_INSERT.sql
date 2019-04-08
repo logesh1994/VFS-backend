@@ -48,7 +48,7 @@ VALUES
 INSERT INTO `outreach_vfs`.`status`
 (`description`)
 VALUES
-('Active'), ('Unregistered'), ('Registered'), ('Failed To Attend'), ('Completed'), ('Attended'), ('Yet To Send Mail'), ('Attended'), ('Pending'), ('Submitted'), ('Mail Sent');
+('Active'), ('Unregistered'), ('Registered'), ('Failed To Attend'), ('Completed'), ('Yet To Send Mail'), ('Attended'), ('Pending'), ('Submitted'), ('Mail Sent');
 
 INSERT INTO `outreach_vfs`.`project`
 (`description`)
@@ -98,10 +98,10 @@ INSERT INTO `outreach_vfs`.`event`
 `event_council_id`,
 `created_by_id`)
 VALUES
-('EVENT0001', 'JAN',1,2,'Donations','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
+('EVENT001', 'JAN',1,2,'Donations','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
 1,1,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512641,512645',
 10,20,10,30,100,4,1,519847),
-('EVENT0002', 'FEB',2,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
+('EVENT002', 'FEB',2,2,'Be A teacher','705, Serangoon Road, Singapore, Singapore, Singapore-328127',
 2,2,'Teach various subjects to the students in Kamarajar Illam',current_date(),'512646,512647',
 10,20,10,30,100,4,1,519847);
 
@@ -109,23 +109,23 @@ INSERT INTO `outreach_vfs`.`event_details`
 (`evnt_id`,`employee_id`,`volunteer_hrs`,`travel_hrs`,`participation_status_id`,
 `feedback_status_id`,`created_by_id`)
 VALUES
-('EVENT0001',512641,2,1,2,7,512641),
-('EVENT0001',512641,2,1,4,7,512641),
-('EVENT0001',512641,2,1,6,11,512641),
-('EVENT0001',512641,2,1,2,10,512641),
-('EVENT0001',512641,2,1,4,10,512641),
-('EVENT0001',512641,2,1,6,10,512641);
+('EVENT001',512641,2,1,7,6,512641),
+('EVENT001',512641,2,1,2,6,512641),
+('EVENT001',512641,2,1,4,6,512641),
+('EVENT001',512641,2,1,7,6,512641),
+('EVENT001',512641,2,1,2,6,512641),
+('EVENT001',512641,2,1,4,6,512641);
 
 INSERT INTO `outreach_vfs`.`event_details`
 (`evnt_id`,`employee_id`,`volunteer_hrs`,`travel_hrs`,`participation_status_id`,
 `feedback_status_id`,`created_by_id`)
 VALUES
-('EVENT0002',512641,2,1,2,7,512641),
-('EVENT0002',512641,2,1,4,7,512641),
-('EVENT0002',512641,2,1,6,11,512641),
-('EVENT0002',512641,2,1,2,10,512641),
-('EVENT0002',512641,2,1,4,10,512641),
-('EVENT0002',512641,2,1,6,10,512641);
+('EVENT002',512641,2,1,7,6,512641),
+('EVENT002',512641,2,1,2,6,512641),
+('EVENT002',512641,2,1,4,6,512641),
+('EVENT002',512641,2,1,7,6,512641),
+('EVENT002',512641,2,1,2,6,512641),
+('EVENT002',512641,2,1,4,6,512641);
 
 
 INSERT INTO `outreach_vfs`.`feedback`
